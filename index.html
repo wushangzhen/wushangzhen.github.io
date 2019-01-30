@@ -264,7 +264,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-30T01:08:09-08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-30T01:36:34-08:00">
                 2019-01-30
               </time>
             
@@ -399,10 +399,10 @@
 <li>column_key: sorted enable range query 可以是复合值 query(row_key, column_start, column_end)</li>
 <li>value: String 许多信息时 Serialization </li>
 </ol>
-<p><img src="friendship.png," alt="Cassandra store friendship" title="Title"></p>
+<p><img src="https://github.com/wushangzhen/Useful-Pircture/blob/master/friendship.png?raw=true" alt="alt text" title="Friendship Example"></p>
 <p><strong>user table 用SQL</strong></p>
 <hr>
-<h2 id="Scale"><a href="#Scale" class="headerlink" title="Scale"></a>Scale</h2><h3 id="Single-point-failure"><a href="#Single-point-failure" class="headerlink" title="Single point failure"></a>Single point failure</h3><ul>
+<h1 id="Scale"><a href="#Scale" class="headerlink" title="Scale"></a>Scale</h1><h2 id="Single-point-failure"><a href="#Single-point-failure" class="headerlink" title="Single point failure"></a>Single point failure</h2><ul>
 <li>数据拆分 Sharding (NoSQL自带， MySQL不带)<br>  按照一定的规则，将数据拆分成不同的部分，保存在不同的机器上<br>  这样就算挂也不会导致网站 100% 不可用</li>
 <li>数据备份 Replica<br>  通常的做法是一式三份(重要的事情“写”三遍)<br>  Replica 同时还能分摊读请求</li>
 </ul>
