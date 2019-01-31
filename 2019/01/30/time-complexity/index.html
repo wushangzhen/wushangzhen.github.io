@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Shangzhen&#39;s Blog">
 <meta property="og:description" content="时间复杂度（Time Complexity） O(logN)的算法几乎可以确定是二分法，如果一个算法的暴力解法的时间复杂度为O(N)，继续优化的结果一般只能是O(logn)， 一般不会考察O(1)的解法在面试的时候。    一个算法的运行时间与其所要执行的语句的数量成正比，而所要执行的语句与问题规模正相关。因此算法的时间复杂度可以表示为一个与问题规模 N 相关的多项式。   只保留最高次项作为时间">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-01-30T09:54:34.959Z">
+<meta property="og:updated_time" content="2019-01-30T09:59:50.379Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Algorithm——Complexity">
 <meta name="twitter:description" content="时间复杂度（Time Complexity） O(logN)的算法几乎可以确定是二分法，如果一个算法的暴力解法的时间复杂度为O(N)，继续优化的结果一般只能是O(logn)， 一般不会考察O(1)的解法在面试的时候。    一个算法的运行时间与其所要执行的语句的数量成正比，而所要执行的语句与问题规模正相关。因此算法的时间复杂度可以表示为一个与问题规模 N 相关的多项式。   只保留最高次项作为时间">
@@ -262,7 +262,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-30T01:54:34-08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-30T01:59:50-08:00">
                 2019-01-30
               </time>
             
@@ -399,7 +399,8 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Fibo</span> <span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">0</span> || n == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> Fibo(n - <span class="number">1</span>) + Fibo(n - <span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <script type="math/tex; mode=display">O(2<sup>/frac{n}{2}</sup>) ~ O(2<sup>n</sup>)</script><p>计算时间复杂度的上界：</p>
 <script type="math/tex; mode=display">F(n) = F(n - 1) + F(n - 2) < 2 * F(n - 1)</script><p>时间复杂度的上界为：</p>
-<script type="math/tex; mode=display">< T(n) = 2 * T(n - 1) + O(1) = O(2^n)</script><p>时间复杂度的下界为：<script type="math/tex">> T(n) = 2 * T(n - 2) + O(1) = O(2 ^ /frac{n}{2})</script><br><a href="https://www.cnblogs.com/33debug/p/6848330.html" target="_blank" rel="noopener"><font color="red">Fibo算法分析</font></a><br><strong> 注意这个是结果每次都要求的 </strong><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] F = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">50</span>];</span><br><span class="line">F[<span class="number">0</span>] = F[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">…</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Fibo</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (F[n] != <span class="number">0</span>) <span class="keyword">return</span> F[n];</span><br><span class="line">    F[n] = Fibo(n<span class="number">-1</span>) + Fibo(n<span class="number">-2</span>);</span><br><span class="line">    <span class="keyword">return</span> F[n];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<script type="math/tex; mode=display">< T(n) = 2 * T(n - 1) + O(1) = O(2^n)</script><p>时间复杂度的下界为：</p>
+<script type="math/tex; mode=display">> T(n) = 2 * T(n - 2) + O(1) = O(2 ^ /frac{n}{2})</script><p><a href="https://www.cnblogs.com/33debug/p/6848330.html" target="_blank" rel="noopener"><font color="red">Fibo算法分析</font></a><br><strong> 注意这个是结果每次都要求的 </strong><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] F = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">50</span>];</span><br><span class="line">F[<span class="number">0</span>] = F[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">…</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Fibo</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (F[n] != <span class="number">0</span>) <span class="keyword">return</span> F[n];</span><br><span class="line">    F[n] = Fibo(n<span class="number">-1</span>) + Fibo(n<span class="number">-2</span>);</span><br><span class="line">    <span class="keyword">return</span> F[n];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>O(n)<br><strong> 这个结果用F[n]记录，所以时间复杂度是不同的 </strong></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">    <span class="keyword">while</span> (j &lt; n &amp;&amp; nums[j] - nums[i] &lt; window) &#123;</span><br><span class="line">        j++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>O(n)<br>典型的 双指针算法，[i, j)滑动窗口的两端，大家一定要记住，数循环次数是一个偷懒的时间复杂度计算方法，却不是最准确的时间复杂度计算方法。时间复杂度的定义，是程序总共执行的语句数目的数量级。在这个代码中，执行次数最多的是 j++ 这个循环主体。而这个循环体不会被执行O(n<sup>2</sup>)次，因为 j 在每次 i 循环的时候，不会被重置到 i 或者 0 的位置开始重新计算。j一直是自顾自的单向递增，那么一旦某一次 while 循环使得 j++ 执行了 n 次以后，while 循环就再也进不去了。因此总共的执行次数是O(n+n)=O(n)。</p>
@@ -440,8 +441,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/30/system-design-2/" rel="next" title="System Design-2 Design User System - DataBase & Memcache">
-                <i class="fa fa-chevron-left"></i> System Design-2 Design User System - DataBase & Memcache
+              <a href="/2018/04/27/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
               </a>
             
           </div>
@@ -449,6 +450,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/30/system-design-2/" rel="prev" title="System Design 2 Design User System - DataBase & Memcache">
+                System Design 2 Design User System - DataBase & Memcache <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -525,7 +530,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -536,7 +541,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">categories</span>
                 
               </div>
