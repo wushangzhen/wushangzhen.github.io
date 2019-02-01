@@ -233,6 +233,171 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/01/single-source-shortest-path/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shangzhen Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shangzhen's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/01/single-source-shortest-path/" itemprop="url">Graph Theory - Single Source Shortest Distance Path</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-01T01:27:30-08:00">
+                2019-02-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>很气，昨天做OA竟然出了一个Bellman Ford的单源最短路径的问题，虽然学过，但是java代码当时不会写，所以应该OA也挂了，后来总结了一下发现的确是算法的基础还不够牢固，虽然上过算法课但是只是明白了其中的皮毛，真的要掌握还是要多花时间写博客进行总结，做题不用多要的是熟练，我感觉还是陷入了刷题数量的误区忘记了遍数多才是王道，停止虚荣的刷题把！！！单源最短路径虽然考的不多但是还是要掌握的</p>
+<p>大致的意思是，给一个带权值的无向或者有向图和一个源点，计算从这个源点出发所得到的到达每个顶点的路径，并让到达每个顶点的权值最少。</p>
+<hr>
+<h1 id="Bell-Ford-Algorithm"><a href="#Bell-Ford-Algorithm" class="headerlink" title="Bell Ford Algorithm"></a>Bell Ford Algorithm</h1><p>这个算法可以作用在负权值的情况，而Dijkstra算法则不行。现实生活中还是有负权值的存在的，而且负权值可能会构成一个负权值的环这样的话，其他的算法可能会让这个环的权值一直变小，陷入死循环。</p>
+<p>输入G(V,E)</p>
+<ol>
+<li>初始化一个和V数量相同大小的数组dist[]，初始化为INF, 源点为0</li>
+<li>计算最短距离，需要循环V - 1次, 边的顺序是随意的但每次都要用相同的顺序<ul>
+<li>如果dist[v] &gt; dist[u] + weight, 更新dist[v] = dist[u] + weight</li>
+</ul>
+</li>
+<li>结束之后，再重新跑一边每条边，如果还是出现dist[v] &gt; dist[u] + weight, 说明有负权值环</li>
+</ol>
+<p><strong>算法复杂度O(VE)</strong></p>
+<p>一般的OA或者OJ图的输入会给许多个二元数组，比如[1, 2], 昨天见的那道题有所不同是两个数组city_from[0]—1 city_to[0] —2<br>但是一般的建图算法都是一样的，一个map存节点和邻接节点，另一个map存入度, 注意是有向图还是无向图<br>图初始化代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">void function(int[] arr1, int[] arr2, int[] weight) &#123;</span><br><span class="line">    // suppose there is not a duplicate edge and it is non directinal edge</span><br><span class="line">    Map&lt;Integer, List&lt;Integer&gt;&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">    for (int i = 0; i &lt; arr1.length; i++) &#123;</span><br><span class="line">        map.putIfAbsent(arr1[i], new ArrayList&lt;&gt;());</span><br><span class="line">        map.putIfAbsent(arr2[i], new ArrayList&lt;&gt;());</span><br><span class="line">        map.get(arr1[i]).add(arr2[i]);</span><br><span class="line">        map.get(arr2[i]).add(arr1[i]);</span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>拿到这个map之后就等于拿到了G(V, E), 然后我们就可以进行BellMan-Ford, 当然了这个题不建图操作起来更简单一些。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">import java.util.*;</span><br><span class="line">class Solution &#123;</span><br><span class="line">    public static void bellmanFord(int source, int[] arrFrom, int[] arrTo, int[] weight, int number) &#123;</span><br><span class="line">        int[] dist = new int[number];</span><br><span class="line">        Arrays.fill(dist, Integer.MAX_VALUE);</span><br><span class="line">        dist[source] = 0; </span><br><span class="line">        for (int i = 0; i &lt; number - 1; i++) &#123;</span><br><span class="line">            for (int j = 0; j &lt; arrFrom.length; j++) &#123;</span><br><span class="line">                if (dist[arrFrom[j]] != Integer.MAX_VALUE &amp;&amp; dist[arrTo[j]] &gt; dist[arrFrom[j]] + weight[j]) &#123;</span><br><span class="line">                dist[arrTo[j]] = dist[arrFrom[j]] + weight[j];    </span><br><span class="line">                &#125; </span><br><span class="line">                if (dist[arrTo[j]] != Integer.MAX_VALUE &amp;&amp; dist[arrFrom[j]] &gt; dist[arrTo[j]] + weight[j]) &#123;</span><br><span class="line">                dist[arrFrom[j]] = dist[arrTo[j]] + weight[j];    </span><br><span class="line">                &#125; </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        // 检查负环需要再跑一下上面的算法</span><br><span class="line">        for (int i = 0; i &lt; dist.length; i++) &#123;</span><br><span class="line">            System.out.printf(&quot;index: %d, dist[i]: %d\n&quot;, i, dist[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        int[] arrFrom = &#123;0, 0, 1, 3, 1, 2&#125;;</span><br><span class="line">        int[] arrTo = &#123;1, 2, 3, 4, 4, 4&#125;;</span><br><span class="line">        int[] weight = &#123;1, 2, 2, 1, 1, 1&#125;;</span><br><span class="line">        bellmanFord(0, arrFrom, arrTo, weight, 5);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>无向图其实就是有向图</strong><br>这么简单都没做出来，洗洗睡吧</p>
+<p><img src="https://cdn.programiz.com/sites/tutorial2program/files/Bellman-Ford-Algorithm.jpg" alt="example"><br><a href="https://www.geeksforgeeks.org/bellman-ford-algorithm-dp-23/" target="_blank" rel="noopener">参考资料</a></p>
+<hr>
+<h1 id="Dijkstra-Algorithm"><a href="#Dijkstra-Algorithm" class="headerlink" title="Dijkstra Algorithm"></a>Dijkstra Algorithm</h1><p>这个算法举个leetcode的题为例子<br><a href="https://leetcode.com/problems/cheapest-flights-within-k-stops/description/" target="_blank" rel="noopener">787. Cheapest Flights Within K Stops</a><br>题意是给你一个图每个edge有weights找到最多k stops的最便宜的方案。<br>就是要找到从起点出发的每个点的最短路径，在计算的过程中看符不符合要求。<br>如果需要构造新的class的话先构造新的class，把源点压入queue中，每次poll出来最小的，这个值就是最后确定的值，遍历它的所有邻接节点如果没有访问过就加入queue, 直到queue里不存在东西。<br>出现三元组的时候可以通过建立<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;Integer, Map&lt;Integer, Integer&gt;&gt; map</span><br></pre></td></tr></table></figure></p>
+<p>来分别建立起点终点权值之间的关系.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">class Point &#123;</span><br><span class="line">    int num;</span><br><span class="line">    int weight;</span><br><span class="line">    public Point(int num, int weight) &#123;</span><br><span class="line">        this.num = num;</span><br><span class="line">        this.weight = weight;    </span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br><span class="line">void Dijkstra(int[][] weights, int n, int src) &#123;</span><br><span class="line">    int[] dist = new int[n];    </span><br><span class="line">    Arrays.fill(dist, Integer.MAX_VALUE);</span><br><span class="line">    Map&lt;Integer, Map&lt;Integer, Integer&gt;&gt; topo = new HashMap&lt;&gt;();</span><br><span class="line">    //初始化</span><br><span class="line">    for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        topo.put(i, new HashMap&lt;&gt;());    </span><br><span class="line">    &#125;</span><br><span class="line">    for (int[] weight : weights) &#123;</span><br><span class="line">        topo.get(weight[0]).put(weight[1], weight[2]);    </span><br><span class="line">    &#125;</span><br><span class="line">    Queue&lt;Point&gt; q = new PriorityQueue&lt;&gt;((a, b) -&gt; (a.weight - b.weight));</span><br><span class="line">    q.add(new Point(src, 0));</span><br><span class="line">    while (!q.isEmpty()) &#123;</span><br><span class="line">        Point p = q.poll();</span><br><span class="line">        if (dist[p.num] == Integer.MAX_VALUE) &#123;</span><br><span class="line">            dist[p.num] = p.weight;</span><br><span class="line">        &#125;</span><br><span class="line">        for (Map.Entry&lt;Integer, Integer&gt; entry : topo.get(p.num).entrySet&lt;&gt;()) &#123;</span><br><span class="line">            if (dist[entry.getKey()] == Integer.MAX_VALUE) &#123;</span><br><span class="line">                q.add(new Point(entry.getKey(), entry.getValue() + p.weight));    </span><br><span class="line">            &#125;    </span><br><span class="line">        &#125;   </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Exercise"><a href="#Exercise" class="headerlink" title="Exercise"></a>Exercise</h1><p><a href="https://leetcode.com/problems/cheapest-flights-within-k-stops/description/" target="_blank" rel="noopener">787. Cheapest Flights Within K Stops</a><br><a href="https://leetcode.com/problems/network-delay-time/description/" target="_blank" rel="noopener">743. Network Delay Time</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/30/computer-system-elf/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1079,7 +1244,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
