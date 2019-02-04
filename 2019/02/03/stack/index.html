@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="IntroductionLeetCode里面有很多关于stack的题都是一些非常巧妙的方法，尤其是单调栈的应用，在这里总结一下关于stack的难题。关于stack最先想到的就是20. Valid Parentheses, 这个是stack的基本应用，简单的就不说了我们直接来难题。  Trapping Rain WaterTrapping Rain Water这道题可以用双指针的方法或者stack的">
+<meta name="keywords" content="Algorithm, Computer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Stack">
+<meta property="og:url" content="http://yoursite.com/2019/02/03/stack/index.html">
+<meta property="og:site_name" content="Shangzhen&#39;s Blog">
+<meta property="og:description" content="IntroductionLeetCode里面有很多关于stack的题都是一些非常巧妙的方法，尤其是单调栈的应用，在这里总结一下关于stack的难题。关于stack最先想到的就是20. Valid Parentheses, 这个是stack的基本应用，简单的就不说了我们直接来难题。  Trapping Rain WaterTrapping Rain Water这道题可以用双指针的方法或者stack的">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://www.programcreek.com/wp-content/uploads/2016/04/verify-preorder-serialization-of-a-binary-tree-leetcode-java-730x468.jpg">
+<meta property="og:updated_time" content="2019-02-04T03:14:32.102Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Stack">
+<meta name="twitter:description" content="IntroductionLeetCode里面有很多关于stack的题都是一些非常巧妙的方法，尤其是单调栈的应用，在这里总结一下关于stack的难题。关于stack最先想到的就是20. Valid Parentheses, 这个是stack的基本应用，简单的就不说了我们直接来难题。  Trapping Rain WaterTrapping Rain Water这道题可以用双指针的方法或者stack的">
+<meta name="twitter:image" content="https://www.programcreek.com/wp-content/uploads/2016/04/verify-preorder-serialization-of-a-binary-tree-leetcode-java-730x468.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/03/stack/"/>
+
+
+
+
+
+  <title>Stack | Shangzhen's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shangzhen's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/03/stack/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shangzhen Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shangzhen's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Stack</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-03T19:14:32-08:00">
+                2019-02-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>LeetCode里面有很多关于stack的题都是一些非常巧妙的方法，尤其是单调栈的应用，在这里总结一下关于stack的难题。<br>关于stack最先想到的就是<a href="https://leetcode.com/problems/valid-parentheses/description/" target="_blank" rel="noopener">20. Valid Parentheses</a>, 这个是stack的基本应用，简单的就不说了我们直接来难题。</p>
+<hr>
+<h1 id="Trapping-Rain-Water"><a href="#Trapping-Rain-Water" class="headerlink" title="Trapping Rain Water"></a>Trapping Rain Water</h1><p><a href="https://leetcode.com/problems/trapping-rain-water/description/" target="_blank" rel="noopener">Trapping Rain Water</a><br>这道题可以用双指针的方法或者stack的方法，这里呢我们先用stack的方法。<br>先构造一个单调递减的stack，每次拿到一个数先比较栈顶元素是否小于这个数，如果小于这个数就pop出来进行计算，这个单调递增stack里面应该存坐标因为算积水量的时候要用到index的。pop出来一个元素之后就要马上计算以它左右为边界的地方能存多少水，height[i]与stack顶的元素找最小值，计算水量，重复循环直到stack为空或者stack顶的元素大于height[i];</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int trap(int[] height) &#123;</span><br><span class="line">        if(height == null || height.length == 0) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        int n = height.length;</span><br><span class="line">        Stack&lt;Integer&gt; stk = new Stack&lt;&gt;();</span><br><span class="line">        int sum = 0;</span><br><span class="line">        for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            if (stk.isEmpty()) &#123;</span><br><span class="line">                stk.push(i); // stk is empty we push element directly to stack</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                while (!stk.isEmpty() &amp;&amp; height[stk.peek()] &lt;= height[i]) &#123;</span><br><span class="line">                    int h = height[stk.pop()]; // get the height of current element to compute</span><br><span class="line">                    if (!stk.isEmpty()) &#123; // means it has leftbound</span><br><span class="line">                        int leftBound = height[stk.peek()];</span><br><span class="line">                        sum += (Math.min(leftBound, height[i]) - h) * (i - stk.peek() - 1); // compute water volumn</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                stk.push(i); // push the index into stack</span><br><span class="line">            &#125;        </span><br><span class="line">        &#125;</span><br><span class="line">        return sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">Time Complexity and Space Complexity O(n)</span><br></pre></td></tr></table></figure>
+<p><strong>注意stack一定是单调递减的, 不能有相等的, 存index挺关键的</strong></p>
+<hr>
+<h1 id="Min-Stack"><a href="#Min-Stack" class="headerlink" title="Min Stack"></a>Min Stack</h1><p><a href="https://leetcode.com/problems/min-stack/description/" target="_blank" rel="noopener">Min Stack</a><br>维持一个单调递减stack，stack栈顶一直维持所有的元素的最小值，每次加入的时候和栈顶元素进行判断，如果小于或等于栈顶元素或者stack为空的时候直接加入stack中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">class MinStack &#123;</span><br><span class="line"></span><br><span class="line">    /** initialize your data structure here. */</span><br><span class="line">    Stack&lt;Integer&gt; stk1;</span><br><span class="line">    Stack&lt;Integer&gt; stk2;</span><br><span class="line">    public MinStack() &#123;</span><br><span class="line">        stk1 = new Stack&lt;&gt;();</span><br><span class="line">        stk2 = new Stack&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public void push(int x) &#123;</span><br><span class="line">        stk1.push(x);</span><br><span class="line">        if (!stk2.isEmpty() &amp;&amp; stk2.peek() &lt; x) &#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        stk2.push(x);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public void pop() &#123;</span><br><span class="line">        int value = stk1.pop();</span><br><span class="line">        if (stk2.peek() == value) &#123;</span><br><span class="line">            stk2.pop();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public int top() &#123;</span><br><span class="line">        return stk1.peek();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public int getMin() &#123;</span><br><span class="line">        return stk2.peek();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Your MinStack object will be instantiated and called as such:</span><br><span class="line"> * MinStack obj = new MinStack();</span><br><span class="line"> * obj.push(x);</span><br><span class="line"> * obj.pop();</span><br><span class="line"> * int param_3 = obj.top();</span><br><span class="line"> * int param_4 = obj.getMin();</span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="Max-Stack"><a href="#Max-Stack" class="headerlink" title="Max Stack"></a>Max Stack</h1><p><a href="https://leetcode.com/problems/max-stack/description/" target="_blank" rel="noopener">Max Stack</a><br>这里需要维持一个单调递增stack等于记录每加入一个数之后最大值是多少，popmax的时候要得到递增stack里面的当前最大值，pop原始stack的值，然后再一个个的push进去，注意的点是两个stack里面元素数目是相同的，这个是这个题的关键</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">class MaxStack &#123;</span><br><span class="line"></span><br><span class="line">    /** initialize your data structure here. */</span><br><span class="line">    Stack&lt;Integer&gt; stk1;</span><br><span class="line">    Stack&lt;Integer&gt; stk2;</span><br><span class="line">    public MaxStack() &#123;</span><br><span class="line">        stk1 = new Stack&lt;&gt;();</span><br><span class="line">        stk2 = new Stack&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public void push(int x) &#123;</span><br><span class="line">        stk1.push(x);</span><br><span class="line">        if (!stk2.isEmpty() &amp;&amp; stk2.peek() &gt; x) &#123;</span><br><span class="line">            stk2.push(stk2.peek());</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            stk2.push(x);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public int pop() &#123;</span><br><span class="line">        stk2.pop();</span><br><span class="line">        return stk1.pop();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public int top() &#123;</span><br><span class="line">        return stk1.peek();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public int peekMax() &#123;</span><br><span class="line">        return stk2.peek();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public int popMax() &#123;</span><br><span class="line">        int value = stk2.peek();</span><br><span class="line">        Stack&lt;Integer&gt; tmp = new Stack&lt;&gt;();</span><br><span class="line">        while (stk1.peek() != value) &#123;</span><br><span class="line">            tmp.add(stk1.pop());</span><br><span class="line">            stk2.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        stk1.pop();</span><br><span class="line">        stk2.pop();</span><br><span class="line">        while (!tmp.isEmpty()) &#123;</span><br><span class="line">            push(tmp.pop());</span><br><span class="line">        &#125;</span><br><span class="line">        return value;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Your MaxStack object will be instantiated and called as such:</span><br><span class="line"> * MaxStack obj = new MaxStack();</span><br><span class="line"> * obj.push(x);</span><br><span class="line"> * int param_2 = obj.pop();</span><br><span class="line"> * int param_3 = obj.top();</span><br><span class="line"> * int param_4 = obj.peekMax();</span><br><span class="line"> * int param_5 = obj.popMax();</span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="Next-Greater-Element-I"><a href="#Next-Greater-Element-I" class="headerlink" title="Next Greater Element I"></a>Next Greater Element I</h1><p><a href="https://leetcode.com/problems/next-greater-element-i/description/" target="_blank" rel="noopener">Next Greater Element I</a><br>这个也是维持一个单调递减stack，每次加入一个比栈顶大的元素时要连续pop出来元素，这些比当前元素小的next greater element就是当前元素，用map记下来就好了，也很巧妙。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int[] nextGreaterElement(int[] nums1, int[] nums2) &#123;</span><br><span class="line">        Map&lt;Integer, Integer&gt; memo = new HashMap&lt;&gt;();</span><br><span class="line">        Stack&lt;Integer&gt; stk = new Stack&lt;&gt;();</span><br><span class="line">        for (int num : nums2) &#123;</span><br><span class="line">            while (!stk.isEmpty() &amp;&amp; stk.peek() &lt; num) &#123;</span><br><span class="line">                memo.put(stk.pop(), num);</span><br><span class="line">            &#125;</span><br><span class="line">            stk.push(num);</span><br><span class="line">        &#125;</span><br><span class="line">        int n = nums1.length;</span><br><span class="line">        int[] res = new int[n];</span><br><span class="line">        for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            res[i] = memo.getOrDefault(nums1[i], -1);</span><br><span class="line">        &#125; </span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="Largest-Rectangle-in-Histogram"><a href="#Largest-Rectangle-in-Histogram" class="headerlink" title="Largest Rectangle in Histogram"></a>Largest Rectangle in Histogram</h1><p><a href="https://leetcode.com/problems/largest-rectangle-in-histogram/description/" target="_blank" rel="noopener">Largest Rectangle in Histogram</a><br>这个题也非常的巧妙，维持一个单调递增stack，每出现的元素比栈顶元素小的时候，需要进行计算，以stack中元素为边长到当前元素之间的面积，如果计算过程中stack为空说明这个在最后一个元素前面的元素都比当前元素大，计算面积即可。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int largestRectangleArea(int[] heights) &#123;</span><br><span class="line">        if (heights == null || heights.length == 0) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        Stack&lt;Integer&gt; stk = new Stack&lt;&gt;();</span><br><span class="line">        int n = heights.length;</span><br><span class="line">        // 维持一个单调递增stack这样的话，就可以每次pop出来的时候根据当前坐标计算面积</span><br><span class="line">        // 注意最后压入-1进行所有的清算</span><br><span class="line">        int max = 0;</span><br><span class="line">        for (int i = 0; i &lt;= n; i++) &#123;</span><br><span class="line">            int cur = (i == n) ? -1 : heights[i];</span><br><span class="line">            while (!stk.isEmpty() &amp;&amp; cur &lt;= heights[stk.peek()]) &#123;</span><br><span class="line">                int h = heights[stk.pop()];</span><br><span class="line">                int w = stk.isEmpty() ? i : i - stk.peek() - 1;</span><br><span class="line">                max = Math.max(max, h * w);</span><br><span class="line">            &#125;</span><br><span class="line">            stk.push(i);</span><br><span class="line">        &#125;</span><br><span class="line">        return max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="Maximal-Rectangle"><a href="#Maximal-Rectangle" class="headerlink" title="Maximal Rectangle"></a>Maximal Rectangle</h1><p><a href="https://leetcode.com/problems/maximal-rectangle/description/" target="_blank" rel="noopener">Maximal Rectangle</a><br>这个题和之前那个题不同之处就是扩展到了二维，每行都要算一下largest rectangle而已，也是非常巧妙的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int maximalRectangle(char[][] matrix) &#123;</span><br><span class="line">        // 这个题需要降维来解，用84题的方法，每一行进行计算，累计一下进行直方图的计算</span><br><span class="line">        if (matrix == null || matrix.length == 0) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        int n = matrix.length;</span><br><span class="line">        int m = matrix[0].length;</span><br><span class="line">        if (m == 0) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        int[] dp = new int[m];</span><br><span class="line">        int max = 0;</span><br><span class="line">        for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            for (int j = 0; j &lt; m; j++) &#123;</span><br><span class="line">                dp[j] = (matrix[i][j] == &apos;0&apos;) ? 0 : dp[j] + 1;</span><br><span class="line">            &#125;</span><br><span class="line">            max = Math.max(max, helper(dp));</span><br><span class="line">        &#125;</span><br><span class="line">        return max;</span><br><span class="line">    &#125;</span><br><span class="line">    public int helper(int[] dp) &#123;</span><br><span class="line">        Stack&lt;Integer&gt; stk = new Stack&lt;&gt;();</span><br><span class="line">        int n = dp.length;</span><br><span class="line">        int max = 0;</span><br><span class="line">        for (int i = 0; i &lt;= n; i++) &#123;</span><br><span class="line">            int cur = (i == n) ? -1 : dp[i];</span><br><span class="line">            while (!stk.isEmpty() &amp;&amp; cur &lt;= dp[stk.peek()]) &#123;</span><br><span class="line">                int h = dp[stk.pop()];</span><br><span class="line">                int w = stk.isEmpty() ? i : i - stk.peek() - 1;</span><br><span class="line">                max = Math.max(max, h * w);</span><br><span class="line">            &#125;</span><br><span class="line">            stk.push(i);</span><br><span class="line">        &#125;</span><br><span class="line">        return max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="Binary-Tree-Postorder-Traversal"><a href="#Binary-Tree-Postorder-Traversal" class="headerlink" title="Binary Tree Postorder Traversal"></a>Binary Tree Postorder Traversal</h1><p><a href="https://leetcode.com/problems/binary-tree-postorder-traversal/description/" target="_blank" rel="noopener">Binary Tree Postorder Traversal</a><br>一开始我自己的想法是记录一下访问的上一个值和stack里peek值进行比较判断子树是否遍历完，然后看了一个discussion一个大神的解答，只能大喊卧槽了, 利用linkedlist 和 stack，遍历过程中运用addfirst把加入的顺序反过来，背这个就完事了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public List&lt;Integer&gt; postorderTraversal(TreeNode root) &#123;</span><br><span class="line">        List&lt;Integer&gt; ans = new LinkedList&lt;&gt;();</span><br><span class="line">        Stack&lt;TreeNode&gt; stk = new Stack&lt;&gt;();</span><br><span class="line">        if (root == null) &#123;</span><br><span class="line">            return ans;</span><br><span class="line">        &#125;</span><br><span class="line">        stk.push(root);</span><br><span class="line">        while (!stk.isEmpty()) &#123;</span><br><span class="line">            TreeNode cur = stk.pop();</span><br><span class="line">            ans.add(0, cur.val);</span><br><span class="line">            if (cur.left != null) &#123;</span><br><span class="line">                stk.push(cur.left);</span><br><span class="line">            &#125;</span><br><span class="line">            if (cur.right != null) &#123;</span><br><span class="line">                stk.push(cur.right);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="Basic-Calculator"><a href="#Basic-Calculator" class="headerlink" title="Basic Calculator"></a>Basic Calculator</h1><p><a href="https://leetcode.com/problems/basic-calculator/description/" target="_blank" rel="noopener">Basic Calculator</a><br>这个题也是一个相当好stack的应用，维持一个num，res，sign是这个题的关键，都是integer类型的，stack负责处理碰到括号的情况，把原先的res和sign都压到stack里面清零这些值，计算括号里面的值，得到新的res值，再pop出来原来的值进行计算，每次遇到加减号计算，所以最后出循环也要计算一下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int calculate(String s) &#123;</span><br><span class="line">        if (s == null) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        s = s.trim();</span><br><span class="line">        int n = s.length();</span><br><span class="line">        if (n == 0) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        char[] sc = s.toCharArray();</span><br><span class="line">        Stack&lt;Integer&gt; stk = new Stack&lt;&gt;();</span><br><span class="line">        int sign = 1;</span><br><span class="line">        int num = 0;</span><br><span class="line">        int res = 0;</span><br><span class="line">        for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            char c = sc[i];</span><br><span class="line">            if (&apos;0&apos; &lt;= c &amp;&amp; c &lt;= &apos;9&apos;) &#123;</span><br><span class="line">                num = num * 10 + c - &apos;0&apos;;</span><br><span class="line">            &#125; else if (c == &apos;+&apos;) &#123;</span><br><span class="line">                res += sign * num;</span><br><span class="line">                sign = 1;</span><br><span class="line">                num = 0;</span><br><span class="line">            &#125; else if (c == &apos;-&apos;) &#123;</span><br><span class="line">                res += sign * num;</span><br><span class="line">                sign = -1;  </span><br><span class="line">                num = 0;</span><br><span class="line">            &#125; else if (c == &apos;(&apos;) &#123;</span><br><span class="line">                stk.push(res);</span><br><span class="line">                stk.push(sign);</span><br><span class="line">                num = 0;</span><br><span class="line">                res = 0;</span><br><span class="line">                sign = 1;</span><br><span class="line">            &#125; else if (c == &apos;)&apos;) &#123;</span><br><span class="line">                res += sign * num;</span><br><span class="line">                int tempSign = stk.pop();</span><br><span class="line">                int tempRes = stk.pop();</span><br><span class="line">                res = tempRes + tempSign * res;</span><br><span class="line">                num = 0;</span><br><span class="line">                sign = 1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        res += sign * num;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="Verify-Preorder-Sequence-in-Binary-Search-Tree"><a href="#Verify-Preorder-Sequence-in-Binary-Search-Tree" class="headerlink" title="Verify Preorder Sequence in Binary Search Tree"></a>Verify Preorder Sequence in Binary Search Tree</h1><p><a href="https://leetcode.com/problems/verify-preorder-sequence-in-binary-search-tree/description/" target="_blank" rel="noopener">Verify Preorder Sequence in Binary Search Tree</a><br>这个题也是用stack的典型例子，维持一个单调递减stack还有一个low值，这个low值维持的是当前元素到末尾的lowerbound，每次出现元素比栈顶元素大的时候就说明进入到了右子树，栈顶元素就相应变成lowbound，继续pop来找到右子树的位置，如果过程中low值大于了当前值，返回false, O(1)space的方法有点巧妙，暂时就先不在这篇讲了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public boolean verifyPreorder(int[] preorder) &#123;</span><br><span class="line">        if (preorder == null || preorder.length == 0) &#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        Stack&lt;Integer&gt; stk = new Stack&lt;&gt;();</span><br><span class="line">        int low = Integer.MIN_VALUE;</span><br><span class="line">        for (int i : preorder) &#123;</span><br><span class="line">            if (low &gt;= i) &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">            while (!stk.isEmpty() &amp;&amp; i &gt;= stk.peek()) &#123;</span><br><span class="line">                low = stk.pop();</span><br><span class="line">            &#125;</span><br><span class="line">            stk.push(i);</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="Remove-Duplicate-Letters"><a href="#Remove-Duplicate-Letters" class="headerlink" title="Remove Duplicate Letters"></a>Remove Duplicate Letters</h1><p><a href="https://leetcode.com/problems/remove-duplicate-letters/description/" target="_blank" rel="noopener">Remove Duplicate Letters</a><br>这题也是用stack，先遍历字符串，记录哈希值，然后再次遍历一个一个加入stack中如果出现当前元素小于栈顶元素的情况那么就判断栈顶元素的memo值是否为0，不为0代表以后还会出现就先删掉，一直pop下去就行，维护一个visited，如果已经出现，就代表前方已经安排好了，挺巧妙的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public String removeDuplicateLetters(String s) &#123;</span><br><span class="line">        if (s == null || s.length() == 0) &#123;</span><br><span class="line">            return &quot;&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        int[] memo = new int[26];</span><br><span class="line">        for (int i = 0; i &lt; s.length(); i++) &#123;</span><br><span class="line">            memo[s.charAt(i) - &apos;a&apos;]++;</span><br><span class="line">        &#125;</span><br><span class="line">        boolean[] visited = new boolean[26];</span><br><span class="line">        Stack&lt;Character&gt; stk = new Stack&lt;&gt;();</span><br><span class="line">        char[] sc = s.toCharArray();</span><br><span class="line">        for (int i = 0; i &lt; s.length(); i++) &#123;</span><br><span class="line">            memo[sc[i] - &apos;a&apos;]--;</span><br><span class="line">            if (visited[sc[i] - &apos;a&apos;]) &#123;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            while (!stk.isEmpty() &amp;&amp; stk.peek() &gt; sc[i] &amp;&amp; memo[stk.peek() - &apos;a&apos;] &gt; 0) &#123;</span><br><span class="line">                visited[stk.peek() - &apos;a&apos;] = false;</span><br><span class="line">                stk.pop();</span><br><span class="line">            &#125;</span><br><span class="line">            stk.push(sc[i]);</span><br><span class="line">            visited[sc[i] - &apos;a&apos;] = true;</span><br><span class="line">        &#125;</span><br><span class="line">        StringBuilder sb = new StringBuilder();</span><br><span class="line">        while (!stk.isEmpty()) &#123;</span><br><span class="line">            sb.insert(0, stk.pop());</span><br><span class="line">        &#125;</span><br><span class="line">        return sb.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="Verify-Preorder-Serialization-of-a-Binary-Tree"><a href="#Verify-Preorder-Serialization-of-a-Binary-Tree" class="headerlink" title="Verify Preorder Serialization of a Binary Tree"></a>Verify Preorder Serialization of a Binary Tree</h1><p><a href="https://leetcode.com/problems/verify-preorder-serialization-of-a-binary-tree/description/" target="_blank" rel="noopener">Verify Preorder Serialization of a Binary Tree</a><br>这个题利用stack不断删除叶节点，然后留到最后判断是不是只剩一个#了<br><img src="https://www.programcreek.com/wp-content/uploads/2016/04/verify-preorder-serialization-of-a-binary-tree-leetcode-java-730x468.jpg" alt="图示"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public boolean isValidSerialization(String preorder) &#123;</span><br><span class="line">        if (preorder == null || preorder.length() == 0) &#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        String[] strs = preorder.split(&quot;,&quot;);</span><br><span class="line">        int n = strs.length;</span><br><span class="line">        Stack&lt;String&gt; stk = new Stack&lt;&gt;();</span><br><span class="line">        for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            String cur = strs[i];</span><br><span class="line">            while (cur.equals(&quot;#&quot;) &amp;&amp; !stk.isEmpty() &amp;&amp; stk.peek().equals(cur)) &#123;</span><br><span class="line">                stk.pop();</span><br><span class="line">                if (stk.isEmpty()) &#123;</span><br><span class="line">                    return false;</span><br><span class="line">                &#125;</span><br><span class="line">                stk.pop();</span><br><span class="line">            &#125;</span><br><span class="line">            stk.push(cur);</span><br><span class="line">        &#125;</span><br><span class="line">        return stk.size() == 1 &amp;&amp; stk.peek().equals(&quot;#&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/01/single-source-shortest-path/" rel="next" title="Graph Theory - Single Source Shortest Distance Path">
+                <i class="fa fa-chevron-left"></i> Graph Theory - Single Source Shortest Distance Path
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Shangzhen Wu</p>
+              <p class="site-description motion-element" itemprop="description">This is a personal learning blog</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Trapping-Rain-Water"><span class="nav-number">2.</span> <span class="nav-text">Trapping Rain Water</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Min-Stack"><span class="nav-number">3.</span> <span class="nav-text">Min Stack</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Max-Stack"><span class="nav-number">4.</span> <span class="nav-text">Max Stack</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Next-Greater-Element-I"><span class="nav-number">5.</span> <span class="nav-text">Next Greater Element I</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Largest-Rectangle-in-Histogram"><span class="nav-number">6.</span> <span class="nav-text">Largest Rectangle in Histogram</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Maximal-Rectangle"><span class="nav-number">7.</span> <span class="nav-text">Maximal Rectangle</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Binary-Tree-Postorder-Traversal"><span class="nav-number">8.</span> <span class="nav-text">Binary Tree Postorder Traversal</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic-Calculator"><span class="nav-number">9.</span> <span class="nav-text">Basic Calculator</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Verify-Preorder-Sequence-in-Binary-Search-Tree"><span class="nav-number">10.</span> <span class="nav-text">Verify Preorder Sequence in Binary Search Tree</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Remove-Duplicate-Letters"><span class="nav-number">11.</span> <span class="nav-text">Remove Duplicate Letters</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Verify-Preorder-Serialization-of-a-Binary-Tree"><span class="nav-number">12.</span> <span class="nav-text">Verify Preorder Serialization of a Binary Tree</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shangzhen Wu</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
