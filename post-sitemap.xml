@@ -8,6 +8,38 @@
     </url>
 
     <url>
+        <loc>http://yoursite.com/2019/02/04/trie/</loc>
+        <lastmod>2019-02-04T17:30:16.872Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/2019/02/04/system-design-5/</loc>
+        <lastmod>2019-02-04T15:29:50.354Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/2019/02/04/system-design-2/</loc>
+        <lastmod>2019-02-04T15:29:29.486Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/2019/02/04/computer-system-elf/</loc>
+        <lastmod>2019-02-04T15:29:13.660Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://yoursite.com/2019/02/03/stack/</loc>
         <lastmod>2019-02-04T03:14:32.102Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -18,30 +50,6 @@
     <url>
         <loc>http://yoursite.com/2019/02/01/single-source-shortest-path/</loc>
         <lastmod>2019-02-02T05:54:52.979Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://yoursite.com/2019/02/01/system-design-5/</loc>
-        <lastmod>2019-02-01T21:39:49.018Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://yoursite.com/2019/01/30/computer-system-elf/</loc>
-        <lastmod>2019-01-31T05:28:20.600Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://yoursite.com/2019/01/30/system-design-2/</loc>
-        <lastmod>2019-01-30T23:33:28.713Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

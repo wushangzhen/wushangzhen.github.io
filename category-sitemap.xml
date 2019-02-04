@@ -8,22 +8,22 @@
     </url>
 
     <url>
-        <loc>http://yoursite.com/categories/computer-system/</loc>
-        <lastmod>2019-01-31T05:28:20.600Z</lastmod>
+        <loc>http://yoursite.com/categories/Computer-System/</loc>
+        <lastmod>2019-02-04T15:29:13.660Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://yoursite.com/categories/system-design/</loc>
-        <lastmod>2019-02-01T21:39:49.018Z</lastmod>
+        <loc>http://yoursite.com/categories/System-Design/</loc>
+        <lastmod>2019-02-04T15:29:50.354Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://yoursite.com/categories/Algorithm/</loc>
-        <lastmod>2019-02-04T03:14:32.102Z</lastmod>
+        <lastmod>2019-02-04T17:30:16.872Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
