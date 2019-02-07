@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="WebCrawlerWebCrawler应该是多线程的爬取网页内容的工具, 爬取的网页数量很大并且每周都会有一个循环，这个信息的存储也会很大，通常会用GFS。 Structure Scenario How many web pages?  How long?  How Large?  Service Crawler TaskService StorageService  Storage Use d">
+<meta name="keywords" content="Algorithm, Computer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="System Design 5 - Web Crawler &amp; TypeHead">
+<meta property="og:url" content="http://yoursite.com/2019/02/06/system-design-5/index.html">
+<meta property="og:site_name" content="Shangzhen&#39;s Blog">
+<meta property="og:description" content="WebCrawlerWebCrawler应该是多线程的爬取网页内容的工具, 爬取的网页数量很大并且每周都会有一个循环，这个信息的存储也会很大，通常会用GFS。 Structure Scenario How many web pages?  How long?  How Large?  Service Crawler TaskService StorageService  Storage Use d">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://github.com/wushangzhen/Useful-Pircture/blob/master/Crawler_Structure.png?raw=true">
+<meta property="og:image" content="https://github.com/wushangzhen/Useful-Pircture/blob/master/single-thread-web-crawler.png?raw=true">
+<meta property="og:image" content="https://github.com/wushangzhen/Useful-Pircture/blob/master/tasktable.png?raw=true">
+<meta property="og:image" content="https://github.com/wushangzhen/Useful-Pircture/blob/master/webcrawler+tasktable.png?raw=true">
+<meta property="og:image" content="https://github.com/wushangzhen/Useful-Pircture/blob/master/Typehead%20structure.png?raw=true">
+<meta property="og:updated_time" content="2019-02-07T06:52:16.796Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="System Design 5 - Web Crawler &amp; TypeHead">
+<meta name="twitter:description" content="WebCrawlerWebCrawler应该是多线程的爬取网页内容的工具, 爬取的网页数量很大并且每周都会有一个循环，这个信息的存储也会很大，通常会用GFS。 Structure Scenario How many web pages?  How long?  How Large?  Service Crawler TaskService StorageService  Storage Use d">
+<meta name="twitter:image" content="https://github.com/wushangzhen/Useful-Pircture/blob/master/Crawler_Structure.png?raw=true">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/06/system-design-5/"/>
+
+
+
+
+
+  <title>System Design 5 - Web Crawler & TypeHead | Shangzhen's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shangzhen's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/06/system-design-5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shangzhen Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shangzhen's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">System Design 5 - Web Crawler & TypeHead</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-06T22:52:16-08:00">
+                2019-02-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/System-Design/" itemprop="url" rel="index">
+                    <span itemprop="name">System Design</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="WebCrawler"><a href="#WebCrawler" class="headerlink" title="WebCrawler"></a>WebCrawler</h1><p>WebCrawler应该是多线程的爬取网页内容的工具, 爬取的网页数量很大并且每周都会有一个循环，这个信息的存储也会很大，通常会用GFS。</p>
+<h2 id="Structure"><a href="#Structure" class="headerlink" title="Structure"></a>Structure</h2><p><img src="https://github.com/wushangzhen/Useful-Pircture/blob/master/Crawler_Structure.png?raw=true" alt="WebCrawler Structure"></p>
+<h2 id="Scenario"><a href="#Scenario" class="headerlink" title="Scenario"></a>Scenario</h2><ul>
+<li>How many web pages? </li>
+<li>How long? </li>
+<li>How Large?</li>
+</ul>
+<h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><ul>
+<li>Crawler</li>
+<li>TaskService</li>
+<li>StorageService</li>
+</ul>
+<h2 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h2><ul>
+<li>Use db to store tasks</li>
+<li>BigTable to store web pages</li>
+</ul>
+<h2 id="Simple-Crawler"><a href="#Simple-Crawler" class="headerlink" title="Simple Crawler"></a>Simple Crawler</h2><ol>
+<li>input: URL</li>
+<li>Send an HTTP request and grab the content of the news list page</li>
+<li>Extract all news titles from the news list page</li>
+</ol>
+<h2 id="Single-threaded-Web-Crawler"><a href="#Single-threaded-Web-Crawler" class="headerlink" title="Single-threaded Web Crawler"></a>Single-threaded Web Crawler</h2><p><img src="https://github.com/wushangzhen/Useful-Pircture/blob/master/single-thread-web-crawler.png?raw=true" alt="Structure"><br>不断解析不断存储不断加入Queue中<br>producer and consumer model</p>
+<h2 id="MultiThreaded-Web-Crawler-amp-Distributed-Web-Crawler"><a href="#MultiThreaded-Web-Crawler-amp-Distributed-Web-Crawler" class="headerlink" title="MultiThreaded Web Crawler &amp; Distributed Web Crawler"></a>MultiThreaded Web Crawler &amp; Distributed Web Crawler</h2><p>多个webcrawler同时工作。<br>Three different ways to work together:</p>
+<ol>
+<li>sleep</li>
+<li>condition variable</li>
+<li>semaphore<br>但不一定会提高performance。</li>
+<li>context switch cost</li>
+<li>thread port number limitation</li>
+<li>network bottleneck for single machine<br>如果只按照queue的规则的话，那么有可能有些网页无法及时的爬取，导致信息的不均匀。设计tasktable来避免这一点。<br>有tasktable之后可以有一个messageQueue加锁来实现线程安全<br><img src="https://github.com/wushangzhen/Useful-Pircture/blob/master/tasktable.png?raw=true" alt="TaskTable"><br><img src="https://github.com/wushangzhen/Useful-Pircture/blob/master/webcrawler+tasktable.png?raw=true" alt="Structure"></li>
+</ol>
+<h2 id="How-to-handle-slow-select"><a href="#How-to-handle-slow-select" class="headerlink" title="How to handle slow select"></a>How to handle slow select</h2><p>task table sharding 多个table同时进行，然后需要一个scheduler来进行管理。<br>爬虫的目标不是每个网页只爬一次(要求实时性)的话可能MQ无法保证，因为加到队尾会太长时间再次爬取<br>数据库存网页有没有抓过, task table priority queue timestamp 来看是否抓过, 使用一个db来存储下一次需要抓取的时间<br>这个过程慢一点没关系，offline 不服务用户</p>
+<h2 id="How-to-handle-update-for-failure"><a href="#How-to-handle-update-for-failure" class="headerlink" title="How to handle update for failure"></a>How to handle update for failure</h2><p>Exponential back-off<br>success: crawl after 1 week<br>failure: crawl after 2 weeks<br>failure again: crawl after 4 weeks<br>…<br>保证了效率，不会总去爬失败的网页。</p>
+<h2 id="How-to-handle-dead-cycle"><a href="#How-to-handle-dead-cycle" class="headerlink" title="How to handle dead cycle"></a>How to handle dead cycle</h2><p>One web has so many url, it will only crawl url in sina pages not others.<br>起始网页 seeds 链接多 新闻源网页<br>Use Quota! 为scheduler中每个网页提供一个限量</p>
+<h2 id="Other-key-points"><a href="#Other-key-points" class="headerlink" title="Other key points"></a>Other key points</h2><p>inverted index 搜索引擎关键部分 查询基本不怎么用数据库, 效率低<br>网页之间有很多指向的关系，网页组成的节点<br>crawler 下载所有网页之后丢给GFS(效率大于DB), 拆开文章分成word,<br>inverted index 假的索引，查询引擎(query engine)<br>中文需要断句(word segmentation)<br>英文词态还原 likes-&gt;like<br>viterbi algorithm 分词算法<br>在query engine里做<br>bfs最好,dfs容易stackoverflow<br>crawler 抓完预渲染<br>多线程crawler<br>瓶颈在于加载网页<br>通过网页是否变化来推断timestamp<br>数据库实现队列<br>queue不应该只是先进先出<br>永远不要删数据！！！</p>
+<hr>
+<h1 id="TypeHead"><a href="#TypeHead" class="headerlink" title="TypeHead"></a>TypeHead</h1><h2 id="Scenario-1"><a href="#Scenario-1" class="headerlink" title="Scenario"></a>Scenario</h2><p>DAU 500m<br>Search: 4 <em> 6 </em> 500m = 12b(every user searches 6 times, types 4 letters)<br>QPS = 12b / 86400 = 138k<br>Peak QPS = 138k * 2 = 276k</p>
+<h2 id="Service-1"><a href="#Service-1" class="headerlink" title="Service"></a>Service</h2><ol>
+<li>QueryService</li>
+<li>DataCollectionService</li>
+</ol>
+<h2 id="Storage-1"><a href="#Storage-1" class="headerlink" title="Storage"></a>Storage</h2><h3 id="For-QueryService"><a href="#For-QueryService" class="headerlink" title="For QueryService"></a>For QueryService</h3><p>数据库中like操作是非常expensive的，要用trie来进行优化<br>搜索引擎查询最好是key-value<br>Trie hashMap 效率 hashMap高 Trie省空间 性能差异<br>虽然expected time都是O(n)，但是trie的查找会在内存中跳来跳去<br>并不需要全部存完，可以只存top n的Words, 这个trie有in-memory的也有disk serialization的<br>当Trie太大了内存放不下的话，那么就需要把内存中trie的某些部分序列化之后存到磁盘中，要用的时候再反序列化取到内存中<br>一般就算是执行网页中的动态内容也会放在sandbox中的，不用担心会中毒。<br><img src="https://github.com/wushangzhen/Useful-Pircture/blob/master/Typehead%20structure.png?raw=true" alt="TypeHead"></p>
+<h3 id="For-DataCollectionService"><a href="#For-DataCollectionService" class="headerlink" title="For DataCollectionService"></a>For DataCollectionService</h3><p>dataCollectionService offline 统计query<br>相当于把query的活分一部分给data collection去做，来加速query<br>从log data里统计信息的，可以用BigTable</p>
+<h2 id="How-to-qualify-this-system"><a href="#How-to-qualify-this-system" class="headerlink" title="How to qualify this system"></a>How to qualify this system</h2><ol>
+<li>response time </li>
+<li>result quality</li>
+</ol>
+<h2 id="How-to-reduce-response-time"><a href="#How-to-reduce-response-time" class="headerlink" title="How to reduce response time"></a>How to reduce response time</h2><ol>
+<li>cache result</li>
+<li>pre-fetch</li>
+</ol>
+<h2 id="What-if-trie-gets-too-large"><a href="#What-if-trie-gets-too-large" class="headerlink" title="What if trie gets too large"></a>What if trie gets too large</h2><p>Sharding trie, 多个queryservice一起工作, 用consistent hashing来决定具体的string在哪个机器上。<br>trie sharding 不能用单词开头sharding 有可能一个上面特别多<br>prefic sharding<br>sharding 和 QPS 有关，和trie、hashmap无关</p>
+<h2 id="How-to-reduce-size-of-log-file"><a href="#How-to-reduce-size-of-log-file" class="headerlink" title="How to reduce size of log file"></a>How to reduce size of log file</h2><p>Probalilistic Logging<br>就是每来一次搜索我就扔一次骰子(随机数)，如果扔到了特定的数字就log， 否则就忽略。<br>每个log文件的保留都要有个概率，比如1/1000，这样就能显著减少file量。</p>
+<h2 id="爬虫的效率不影响搜索引擎的效率么？"><a href="#爬虫的效率不影响搜索引擎的效率么？" class="headerlink" title="爬虫的效率不影响搜索引擎的效率么？"></a>爬虫的效率不影响搜索引擎的效率么？</h2><p>只会影响搜索结果的时效性，但是不会影响到向用户返回结果的效率。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/04/trie/" rel="next" title="Trie">
+                <i class="fa fa-chevron-left"></i> Trie
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/06/system-design-6/" rel="prev" title="System Design 6 Distributed System">
+                System Design 6 Distributed System <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Shangzhen Wu</p>
+              <p class="site-description motion-element" itemprop="description">This is a personal learning blog</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#WebCrawler"><span class="nav-number">1.</span> <span class="nav-text">WebCrawler</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Structure"><span class="nav-number">1.1.</span> <span class="nav-text">Structure</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scenario"><span class="nav-number">1.2.</span> <span class="nav-text">Scenario</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Service"><span class="nav-number">1.3.</span> <span class="nav-text">Service</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Storage"><span class="nav-number">1.4.</span> <span class="nav-text">Storage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Simple-Crawler"><span class="nav-number">1.5.</span> <span class="nav-text">Simple Crawler</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-threaded-Web-Crawler"><span class="nav-number">1.6.</span> <span class="nav-text">Single-threaded Web Crawler</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MultiThreaded-Web-Crawler-amp-Distributed-Web-Crawler"><span class="nav-number">1.7.</span> <span class="nav-text">MultiThreaded Web Crawler &amp; Distributed Web Crawler</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-handle-slow-select"><span class="nav-number">1.8.</span> <span class="nav-text">How to handle slow select</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-handle-update-for-failure"><span class="nav-number">1.9.</span> <span class="nav-text">How to handle update for failure</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-handle-dead-cycle"><span class="nav-number">1.10.</span> <span class="nav-text">How to handle dead cycle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Other-key-points"><span class="nav-number">1.11.</span> <span class="nav-text">Other key points</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TypeHead"><span class="nav-number">2.</span> <span class="nav-text">TypeHead</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Scenario-1"><span class="nav-number">2.1.</span> <span class="nav-text">Scenario</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Service-1"><span class="nav-number">2.2.</span> <span class="nav-text">Service</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Storage-1"><span class="nav-number">2.3.</span> <span class="nav-text">Storage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#For-QueryService"><span class="nav-number">2.3.1.</span> <span class="nav-text">For QueryService</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#For-DataCollectionService"><span class="nav-number">2.3.2.</span> <span class="nav-text">For DataCollectionService</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-qualify-this-system"><span class="nav-number">2.4.</span> <span class="nav-text">How to qualify this system</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-reduce-response-time"><span class="nav-number">2.5.</span> <span class="nav-text">How to reduce response time</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What-if-trie-gets-too-large"><span class="nav-number">2.6.</span> <span class="nav-text">What if trie gets too large</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-reduce-size-of-log-file"><span class="nav-number">2.7.</span> <span class="nav-text">How to reduce size of log file</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#爬虫的效率不影响搜索引擎的效率么？"><span class="nav-number">2.8.</span> <span class="nav-text">爬虫的效率不影响搜索引擎的效率么？</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shangzhen Wu</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

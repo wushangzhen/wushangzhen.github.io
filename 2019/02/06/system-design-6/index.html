@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="This is a personal learning blog">
+<meta name="description" content="很难把pb级别放入内存，也就是hashmap可能不大行, 排序也可能不大行使用外排序:bloom filter 比 hash 所占内存小slave server提供了CPU和内存">
 <meta name="keywords" content="Algorithm, Computer">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Shangzhen&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/categories/Computer-System/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="System Design 6 Distributed System">
+<meta property="og:url" content="http://yoursite.com/2019/02/06/system-design-6/index.html">
 <meta property="og:site_name" content="Shangzhen&#39;s Blog">
-<meta property="og:description" content="This is a personal learning blog">
+<meta property="og:description" content="很难把pb级别放入内存，也就是hashmap可能不大行, 排序也可能不大行使用外排序:bloom filter 比 hash 所占内存小slave server提供了CPU和内存">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-02-07T06:58:51.792Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Shangzhen&#39;s Blog">
-<meta name="twitter:description" content="This is a personal learning blog">
+<meta name="twitter:title" content="System Design 6 Distributed System">
+<meta name="twitter:description" content="很难把pb级别放入内存，也就是hashmap可能不大行, 排序也可能不大行使用外排序:bloom filter 比 hash 所占内存小slave server提供了CPU和内存">
 
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/Computer-System/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/02/06/system-design-6/"/>
 
 
 
 
 
-  <title>Category: Computer System | Shangzhen's Blog</title>
+  <title>System Design 6 Distributed System | Shangzhen's Blog</title>
   
 
 
@@ -144,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -228,55 +229,163 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block category">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>Computer System<small>Category</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/06/system-design-6/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shangzhen Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shangzhen's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/02/04/computer-system-elf/" itemprop="url">
-              
-                <span itemprop="name">Computer System 1 - Elf Info Reader</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">System Design 6 Distributed System</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-02-04T23:29:13+08:00"
-              content="2019-02-04" >
-          02-04
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-06T22:58:51-08:00">
+                2019-02-07
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/System-Design/" itemprop="url" rel="index">
+                    <span itemprop="name">System Design</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>很难把pb级别放入内存，也就是hashmap可能不大行, 排序也可能不大行<br>使用外排序:<br>bloom filter 比 hash 所占内存小<br>slave server提供了CPU和内存</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/06/system-design-5/" rel="next" title="System Design 5 - Web Crawler & TypeHead">
+                <i class="fa fa-chevron-left"></i> System Design 5 - Web Crawler & TypeHead
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -284,6 +393,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -489,6 +602,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

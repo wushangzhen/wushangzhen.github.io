@@ -8,16 +8,24 @@
     </url>
 
     <url>
-        <loc>http://yoursite.com/2019/02/04/trie/</loc>
-        <lastmod>2019-02-04T17:30:16.872Z</lastmod>
+        <loc>http://yoursite.com/2019/02/06/system-design-6/</loc>
+        <lastmod>2019-02-07T06:58:51.792Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>http://yoursite.com/2019/02/04/system-design-5/</loc>
-        <lastmod>2019-02-04T15:29:50.354Z</lastmod>
+        <loc>http://yoursite.com/2019/02/06/system-design-5/</loc>
+        <lastmod>2019-02-07T06:52:16.796Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/2019/02/04/trie/</loc>
+        <lastmod>2019-02-04T17:30:16.872Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
