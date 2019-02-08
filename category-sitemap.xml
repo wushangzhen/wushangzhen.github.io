@@ -15,15 +15,15 @@
     </url>
 
     <url>
-        <loc>http://yoursite.com/categories/Algorithm/</loc>
-        <lastmod>2019-02-04T17:30:16.872Z</lastmod>
+        <loc>http://yoursite.com/categories/System-Design/</loc>
+        <lastmod>2019-02-07T06:58:51.792Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://yoursite.com/categories/System-Design/</loc>
-        <lastmod>2019-02-07T06:58:51.792Z</lastmod>
+        <loc>http://yoursite.com/categories/Algorithm/</loc>
+        <lastmod>2019-02-08T01:07:16.350Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
