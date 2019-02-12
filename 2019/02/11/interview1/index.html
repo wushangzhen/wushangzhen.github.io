@@ -79,20 +79,18 @@
 
 
 
-<meta name="description" content="Scenario and Services (想一想情景是什么，需要实现什么功能)情景决定功能 A simple one will include these basic functions  User registration (用户注册) write op LogIn (登陆) Search for user information (查询) read op Store friendship">
+<meta name="description" content="指针变量引用123456int a = 1;int b = 10;int* p = &amp;amp;a;int* &amp;amp;pa = p;(*pa)++; //这里的pa是p的引用，对pa指向的内容+1，a = 2pa = &amp;amp;b; //pa指向b的地址，由于pa是p的引用，所以p也指向b的地址 b = 11  指针初始化12int* p *p = 5 // 因为p没有初始化，所以p是野指针，经常">
 <meta name="keywords" content="Algorithm, Computer">
 <meta property="og:type" content="article">
-<meta property="og:title" content="System Design 2 Design User System - DataBase &amp; Memcache">
-<meta property="og:url" content="http://yoursite.com/2019/02/04/system-design-2/index.html">
+<meta property="og:title" content="C &amp; C++ 1">
+<meta property="og:url" content="http://yoursite.com/2019/02/11/interview1/index.html">
 <meta property="og:site_name" content="Shangzhen&#39;s Blog">
-<meta property="og:description" content="Scenario and Services (想一想情景是什么，需要实现什么功能)情景决定功能 A simple one will include these basic functions  User registration (用户注册) write op LogIn (登陆) Search for user information (查询) read op Store friendship">
+<meta property="og:description" content="指针变量引用123456int a = 1;int b = 10;int* p = &amp;amp;a;int* &amp;amp;pa = p;(*pa)++; //这里的pa是p的引用，对pa指向的内容+1，a = 2pa = &amp;amp;b; //pa指向b的地址，由于pa是p的引用，所以p也指向b的地址 b = 11  指针初始化12int* p *p = 5 // 因为p没有初始化，所以p是野指针，经常">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://github.com/wushangzhen/Useful-Pircture/blob/master/friendship.png?raw=true">
-<meta property="og:updated_time" content="2019-02-04T15:29:29.486Z">
+<meta property="og:updated_time" content="2019-02-11T10:19:49.357Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="System Design 2 Design User System - DataBase &amp; Memcache">
-<meta name="twitter:description" content="Scenario and Services (想一想情景是什么，需要实现什么功能)情景决定功能 A simple one will include these basic functions  User registration (用户注册) write op LogIn (登陆) Search for user information (查询) read op Store friendship">
-<meta name="twitter:image" content="https://github.com/wushangzhen/Useful-Pircture/blob/master/friendship.png?raw=true">
+<meta name="twitter:title" content="C &amp; C++ 1">
+<meta name="twitter:description" content="指针变量引用123456int a = 1;int b = 10;int* p = &amp;amp;a;int* &amp;amp;pa = p;(*pa)++; //这里的pa是p的引用，对pa指向的内容+1，a = 2pa = &amp;amp;b; //pa指向b的地址，由于pa是p的引用，所以p也指向b的地址 b = 11  指针初始化12int* p *p = 5 // 因为p没有初始化，所以p是野指针，经常">
 
 
 
@@ -122,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/02/04/system-design-2/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/02/11/interview1/"/>
 
 
 
 
 
-  <title>System Design 2 Design User System - DataBase & Memcache | Shangzhen's Blog</title>
+  <title>C & C++ 1 | Shangzhen's Blog</title>
   
 
 
@@ -245,7 +243,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/04/system-design-2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/11/interview1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shangzhen Wu">
@@ -262,7 +260,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">System Design 2 Design User System - DataBase & Memcache</h1>
+          <h1 class="post-title" itemprop="name headline">C & C++ 1</h1>
         
 
         <div class="post-meta">
@@ -274,8 +272,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-04T07:29:29-08:00">
-                2019-02-04
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-11T18:19:49+08:00">
+                2019-02-11
               </time>
             
 
@@ -297,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/System-Design/" itemprop="url" rel="index">
-                    <span itemprop="name">System Design</span>
+                  <a href="/categories/Interview/" itemprop="url" rel="index">
+                    <span itemprop="name">Interview</span>
                   </a>
                 </span>
 
@@ -334,111 +332,16 @@
       
 
       
-        <h1 id="Scenario-and-Services-想一想情景是什么，需要实现什么功能"><a href="#Scenario-and-Services-想一想情景是什么，需要实现什么功能" class="headerlink" title="Scenario and Services (想一想情景是什么，需要实现什么功能)"></a>Scenario and Services (想一想情景是什么，需要实现什么功能)</h1><p><strong>情景决定功能</strong></p>
-<p><strong>A simple one will include these basic functions</strong></p>
-<ol>
-<li>User registration (用户注册) write op</li>
-<li>LogIn (登陆)</li>
-<li>Search for user information (查询) read op</li>
-<li>Store friendship info</li>
-</ol>
-<p><strong>The number of write op and read op will determine the design of system. When we want to design a system common used by user(people). it will have more read op than write op. Vice versa for machine used system.</strong><br><strong>人用的读多写少，机器用的写多读少</strong></p>
-<p><strong>DAU(Daily Active User)</strong><br><strong>QPS(Quries Per Seconds)</strong> 决定数据存储系统的选择<br><strong>一天的时间 86400s</strong> 为了计算方便可以 ~ 100k</p>
-<p><strong>注册，登录，信息修改 QPS 约</strong> </p>
-<ul>
-<li>100M * 0.1 / 86400 ~ 100 </li>
-<li>0.1 = 平均每个用户每天登录+注册+信息修改 </li>
-<li>Peak = 100 * 3 = 300 3 为预估值</li>
-</ul>
-<p><strong>查询的QPS 约</strong></p>
-<ul>
-<li>100 M * 100 / 86400 ~ 100k</li>
-<li>100 = 平均每个用户每天与查询用户信息相关的操作次数(查看好友，发信息，更新消息主页)</li>
-<li>Peak = 100k * 3 = 300 k</li>
-</ul>
-<h2 id="DataBase-Choice-based-by-QPS"><a href="#DataBase-Choice-based-by-QPS" class="headerlink" title="DataBase Choice based by QPS"></a>DataBase Choice based by QPS</h2><ul>
-<li>MySQL —— 1k (relation type)</li>
-<li>MongoDB / Cassandra —— 10k (disk type)</li>
-<li>Redis(数据持久化) / Memcached(非数据持久化) —— 100k ~ 1M (cache type)</li>
-</ul>
+        <h1 id="指针变量引用"><a href="#指针变量引用" class="headerlink" title="指针变量引用"></a>指针变量引用</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int a = 1;</span><br><span class="line">int b = 10;</span><br><span class="line">int* p = &amp;a;</span><br><span class="line">int* &amp;pa = p;</span><br><span class="line">(*pa)++; //这里的pa是p的引用，对pa指向的内容+1，a = 2</span><br><span class="line">pa = &amp;b; //pa指向b的地址，由于pa是p的引用，所以p也指向b的地址 b = 11</span><br></pre></td></tr></table></figure>
 <hr>
-<ul>
-<li>读多写少的系统一定要用cache进行优化</li>
-<li>file system cpu client browser 都有cache</li>
-<li>优化DB查询<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class UserService:</span><br><span class="line">    </span><br><span class="line">    def getUser(self, user_id):</span><br><span class="line">        user = cache.get(user_id)</span><br><span class="line">        if user:</span><br><span class="line">            return user</span><br><span class="line">        user = database.get(user_id)</span><br><span class="line">        cache.set(user_id, user)</span><br><span class="line">        return user</span><br><span class="line"></span><br><span class="line">    def setUser(self, user) &#123;</span><br><span class="line">        cache.delete(user.id)</span><br><span class="line">        database.set(user)    </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
+<h1 id="指针初始化"><a href="#指针初始化" class="headerlink" title="指针初始化"></a>指针初始化</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int* p </span><br><span class="line">*p = 5 // 因为p没有初始化，所以p是野指针，经常导致程序崩溃</span><br></pre></td></tr></table></figure>
 <hr>
-<h2 id="Authentication-Service"><a href="#Authentication-Service" class="headerlink" title="Authentication Service"></a>Authentication Service</h2><h3 id="Session-amp-cookie"><a href="#Session-amp-cookie" class="headerlink" title="Session &amp; cookie"></a>Session &amp; cookie</h3><ol>
-<li>用户login之后会创建Session对象（server端）</li>
-<li>返回session_key值到browser</li>
-<li>这个值被browser记录在cookie中</li>
-<li>用户再次访问的时候会带上这个网站上所有的cookie（session_key）</li>
-<li>服务器检测session_key有效就认为用户登录</li>
-</ol>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th></th>
-<th><strong>SessionTable</strong></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>session key</td>
-<td>string</td>
-<td>hash值 全局唯一 无规律</td>
-</tr>
-<tr>
-<td>user_id</td>
-<td>foreign key</td>
-<td>指向 user table 用来找user</td>
-</tr>
-<tr>
-<td>expired_at</td>
-<td>timeStamp</td>
-<td>什么时候过期</td>
-</tr>
-</tbody>
-</table>
-</div>
-<ul>
-<li>这个table存在哪里都可以的，存在database可以持久一点，cache的话速度快 如果单点故障就让全部用户重新登录就好</li>
-</ul>
+<h1 id="临时变量非法引用"><a href="#临时变量非法引用" class="headerlink" title="临时变量非法引用"></a>临时变量非法引用</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const float pi = 3.14;</span><br><span class="line">float f;</span><br><span class="line">float f1(float r) &#123;</span><br><span class="line">    f = r * r * pi;</span><br><span class="line">    return f;    </span><br><span class="line">&#125;</span><br><span class="line">float&amp; f2(float r) &#123;</span><br><span class="line">    f = r * r * pi;</span><br><span class="line">    return f; // 返回f的引用    </span><br><span class="line">&#125;</span><br><span class="line">int main() &#123;</span><br><span class="line">    float f1(float r = 5);</span><br><span class="line">    float&amp; f2(float r = 5); //声明函数的默认参数调用，默认参数为5</span><br><span class="line">    float a = f1(); </span><br><span class="line">    float&amp; b = f1(); // 错误，f1里面计算的值会付给一个temp的临时变量，临时变量是无法建立引用的</span><br><span class="line">    float c = f2(); // 正确，返回全局变量f的引用</span><br><span class="line">    float&amp; d = f2(); // 正确，主函数不定义变量而是直接使用f的引用的方式，最节省内存空间的方式，注意有效期的问题 </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
-<p><strong>读写都很多怎么办?</strong></p>
-<ol>
-<li>增加机器分摊流量</li>
-<li>使用Redis(cache-through) 读写都快 Memecached(cache-aside)</li>
-</ol>
-<ul>
-<li>cache-aside: DB 和 cache 通过web server 进行沟通 memcached + mysql</li>
-<li>cache-through: server只和cache沟通，cache和DB沟通 redis(DB + Cache)</li>
-</ul>
+<h1 id="常量引用"><a href="#常量引用" class="headerlink" title="常量引用"></a>常量引用</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int a = 5;</span><br><span class="line">const int&amp; b = a;</span><br><span class="line">b = 1 // 错误，无法更改, 这样就可以向外暴露一个只读的接口值</span><br><span class="line">a = 1 //正确</span><br><span class="line"></span><br><span class="line">const int c = 5;</span><br><span class="line">int&amp; d = c //错误，必须是常量引用才可以，const int&amp; d = c</span><br></pre></td></tr></table></figure>
+<p><strong>_常量必须用常量引用，非常量也可以用常量引用_</strong></p>
 <hr>
-<h1 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h1><h2 id="FriendShip-Service"><a href="#FriendShip-Service" class="headerlink" title="FriendShip Service"></a>FriendShip Service</h2><ol>
-<li>存为一条信息 查询一次</li>
-<li>存为两条信息 查询两次</li>
-</ol>
-<p><strong>NoSQL很多事都要自己去做，有transaction不能选择NoSQL</strong></p>
-<h3 id="Example-Cassandra"><a href="#Example-Cassandra" class="headerlink" title="Example Cassandra"></a>Example Cassandra</h3><ol>
-<li>row_key: hashKey</li>
-<li>column_key: sorted enable range query 可以是复合值 query(row_key, column_start, column_end)</li>
-<li>value: String 许多信息时 Serialization </li>
-</ol>
-<p><img src="https://github.com/wushangzhen/Useful-Pircture/blob/master/friendship.png?raw=true" alt="alt text" title="Friendship Example"></p>
-<p><strong>user table 用SQL</strong></p>
-<hr>
-<h1 id="Scale"><a href="#Scale" class="headerlink" title="Scale"></a>Scale</h1><h2 id="Single-point-failure"><a href="#Single-point-failure" class="headerlink" title="Single point failure"></a>Single point failure</h2><ul>
-<li>数据拆分 Sharding (NoSQL自带， MySQL不带)<br>  按照一定的规则，将数据拆分成不同的部分，保存在不同的机器上<br>  这样就算挂也不会导致网站 100% 不可用</li>
-<li>数据备份 Replica<br>  通常的做法是一式三份(重要的事情“写”三遍)<br>  Replica 同时还能分摊读请求</li>
-</ul>
-<ul>
-<li>vertical sharding 不同数据放到不同机器 </li>
-<li>Horizontal Sharding 重点！！！普通的hash分配数据时添加机器会发生数据大迁移, 这个属于nonconsistent hashing</li>
-</ul>
+<h1 id="指针和引用"><a href="#指针和引用" class="headerlink" title="指针和引用"></a>指针和引用</h1><p>引用一般是用指针实现的，引用安全，一旦赋值不可能更改。</p>
 
       
     </div>
@@ -463,8 +366,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/04/computer-system-elf/" rel="next" title="Computer System 1 - Elf Info Reader">
-                <i class="fa fa-chevron-left"></i> Computer System 1 - Elf Info Reader
+              <a href="/2019/02/11/ListNode/" rel="next" title="ListNode">
+                <i class="fa fa-chevron-left"></i> ListNode
               </a>
             
           </div>
@@ -473,8 +376,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/02/04/trie/" rel="prev" title="Trie">
-                Trie <i class="fa fa-chevron-right"></i>
+              <a href="/2019/02/11/graph/" rel="prev" title="Graph Theory - BFS & Union Find & Others">
+                Graph Theory - BFS & Union Find & Others <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -598,7 +501,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Scenario-and-Services-想一想情景是什么，需要实现什么功能"><span class="nav-number">1.</span> <span class="nav-text">Scenario and Services (想一想情景是什么，需要实现什么功能)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DataBase-Choice-based-by-QPS"><span class="nav-number">1.1.</span> <span class="nav-text">DataBase Choice based by QPS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Authentication-Service"><span class="nav-number">1.2.</span> <span class="nav-text">Authentication Service</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Session-amp-cookie"><span class="nav-number">1.2.1.</span> <span class="nav-text">Session &amp; cookie</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Storage"><span class="nav-number">2.</span> <span class="nav-text">Storage</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#FriendShip-Service"><span class="nav-number">2.1.</span> <span class="nav-text">FriendShip Service</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Example-Cassandra"><span class="nav-number">2.1.1.</span> <span class="nav-text">Example Cassandra</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Scale"><span class="nav-number">3.</span> <span class="nav-text">Scale</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-point-failure"><span class="nav-number">3.1.</span> <span class="nav-text">Single point failure</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#指针变量引用"><span class="nav-number">1.</span> <span class="nav-text">指针变量引用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#指针初始化"><span class="nav-number">2.</span> <span class="nav-text">指针初始化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#临时变量非法引用"><span class="nav-number">3.</span> <span class="nav-text">临时变量非法引用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常量引用"><span class="nav-number">4.</span> <span class="nav-text">常量引用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#指针和引用"><span class="nav-number">5.</span> <span class="nav-text">指针和引用</span></a></li></ol></div>
             
 
           </div>
