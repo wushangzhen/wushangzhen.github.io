@@ -8,13 +8,6 @@
     </url>
 
     <url>
-        <loc>http://yoursite.com/categories/Computer-System/</loc>
-        <lastmod>2019-02-04T15:29:13.660Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://yoursite.com/categories/Interview/</loc>
         <lastmod>2019-02-11T10:19:49.357Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -31,6 +24,13 @@
     <url>
         <loc>http://yoursite.com/categories/Algorithm/</loc>
         <lastmod>2019-02-13T08:57:41.218Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/categories/Computer-System/</loc>
+        <lastmod>2019-02-13T09:01:54.752Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
