@@ -8,6 +8,22 @@
     </url>
 
     <url>
+        <loc>http://yoursite.com/2019/02/13/graph/</loc>
+        <lastmod>2019-02-14T05:23:30.776Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/2019/02/13/system-design-8/</loc>
+        <lastmod>2019-02-14T05:16:33.087Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://yoursite.com/2019/02/13/computer-system-elf/</loc>
         <lastmod>2019-02-13T09:01:54.752Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -18,14 +34,6 @@
     <url>
         <loc>http://yoursite.com/2019/02/13/time-complexity/</loc>
         <lastmod>2019-02-13T08:57:41.218Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://yoursite.com/2019/02/13/graph/</loc>
-        <lastmod>2019-02-13T08:54:42.537Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
