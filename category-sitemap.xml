@@ -15,20 +15,6 @@
     </url>
 
     <url>
-        <loc>http://yoursite.com/categories/Computer-System/</loc>
-        <lastmod>2019-02-13T09:01:54.752Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://yoursite.com/categories/System-Design/</loc>
-        <lastmod>2019-02-14T05:16:33.087Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://yoursite.com/categories/Algorithm/</loc>
         <lastmod>2019-02-14T05:23:30.776Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -36,8 +22,15 @@
     </url>
 
     <url>
+        <loc>http://yoursite.com/categories/ComputerSystem/</loc>
+        <lastmod>2019-02-14T09:14:58.460Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://yoursite.com/categories/SystemDesign/</loc>
-        <lastmod>2019-02-14T05:32:26.600Z</lastmod>
+        <lastmod>2019-02-14T10:17:22.792Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

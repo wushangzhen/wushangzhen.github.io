@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="This is a personal learning blog">
+<meta name="description" content="http / https 加密效率相对较低rpcprotobuf 序列化，持久化，网络传输thrift系统设计 = 逻辑设计 + 架构设计减少server的工作量，让driver report locations为什么rider QPS远小于driver的？rider不需要像司机那样实时汇报位置，原则上只有打车的时候需要汇报位置。即使为了调度车辆需要手机rider位置信息，其频率也是很低的。为什么">
 <meta name="keywords" content="Algorithm, Computer">
-<meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="http://yoursite.com/tags/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="System Design 7">
+<meta property="og:url" content="http://yoursite.com/2019/02/14/system-design-7/index.html">
 <meta property="og:site_name" content="Shangzhen&#39;s Blog">
-<meta property="og:description" content="This is a personal learning blog">
+<meta property="og:description" content="http / https 加密效率相对较低rpcprotobuf 序列化，持久化，网络传输thrift系统设计 = 逻辑设计 + 架构设计减少server的工作量，让driver report locations为什么rider QPS远小于driver的？rider不需要像司机那样实时汇报位置，原则上只有打车的时候需要汇报位置。即使为了调度车辆需要手机rider位置信息，其频率也是很低的。为什么">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-02-04T03:35:19.839Z">
+<meta property="og:updated_time" content="2019-02-14T09:14:29.745Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tags">
-<meta name="twitter:description" content="This is a personal learning blog">
+<meta name="twitter:title" content="System Design 7">
+<meta name="twitter:description" content="http / https 加密效率相对较低rpcprotobuf 序列化，持久化，网络传输thrift系统设计 = 逻辑设计 + 架构设计减少server的工作量，让driver report locations为什么rider QPS远小于driver的？rider不需要像司机那样实时汇报位置，原则上只有打车的时候需要汇报位置。即使为了调度车辆需要手机rider位置信息，其频率也是很低的。为什么">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/02/14/system-design-7/"/>
 
 
 
 
 
-  <title>tags | Shangzhen's Blog</title>
+  <title>System Design 7 | Shangzhen's Blog</title>
   
 
 
@@ -231,33 +231,164 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/14/system-design-7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shangzhen Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shangzhen's Blog">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">tags</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
+          <h1 class="post-title" itemprop="name headline">System Design 7</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-14T17:14:29+08:00">
+                2019-02-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-      </div>
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SystemDesign/" itemprop="url" rel="index">
+                    <span itemprop="name">SystemDesign</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p>http / https 加密效率相对较低<br>rpc<br>protobuf 序列化，持久化，网络传输<br>thrift<br>系统设计 = 逻辑设计 + 架构设计<br>减少server的工作量，让driver report locations<br>为什么rider QPS远小于driver的？<br>rider不需要像司机那样实时汇报位置，原则上只有打车的时候需要汇报位置。即使为了调度车辆需要手机rider位置信息，其频率也是很低的。<br>为什么司机需要主动查trip table去找match自己的ride? 不是depatch模式吗<br>防止推送的信息丢失，因此保险起见在司机report的时候顺便返回给他匹配的trip。一般一个司机在某个时刻只会匹配一个trip，因此开销不大。<br>composite index<br>不能多个index都是范围的查询，效率低<br>数据按什么查询就按什么拆分</p>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/14/system-design-6/" rel="next" title="System Design 6 Distributed System">
+                <i class="fa fa-chevron-left"></i> System Design 6 Distributed System
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/14/computer-system-elf/" rel="prev" title="Computer System 1 - Elf Info Reader">
+                Computer System 1 - Elf Info Reader <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -536,6 +667,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
