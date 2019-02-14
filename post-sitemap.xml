@@ -8,6 +8,14 @@
     </url>
 
     <url>
+        <loc>http://yoursite.com/2019/02/13/system-design-2/</loc>
+        <lastmod>2019-02-14T05:29:42.432Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://yoursite.com/2019/02/13/graph/</loc>
         <lastmod>2019-02-14T05:23:30.776Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -82,14 +90,6 @@
     <url>
         <loc>http://yoursite.com/2019/02/04/trie/</loc>
         <lastmod>2019-02-04T17:30:16.872Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://yoursite.com/2019/02/04/system-design-2/</loc>
-        <lastmod>2019-02-04T15:29:29.486Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

@@ -243,7 +243,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/04/system-design-2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/04/trie/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shangzhen Wu">
@@ -262,7 +262,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/02/04/system-design-2/" itemprop="url">System Design 2 Design User System - DataBase & Memcache</a></h1>
+                <a class="post-title-link" href="/2019/02/04/trie/" itemprop="url">Trie</a></h1>
         
 
         <div class="post-meta">
@@ -274,8 +274,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-04T23:29:29+08:00">
-                2019-02-04
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-05T01:30:16+08:00">
+                2019-02-05
               </time>
             
 
@@ -297,8 +297,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/System-Design/" itemprop="url" rel="index">
-                    <span itemprop="name">System Design</span>
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
                   </a>
                 </span>
 
@@ -336,111 +336,13 @@
       
         
           
-            <h1 id="Scenario-and-Services-想一想情景是什么，需要实现什么功能"><a href="#Scenario-and-Services-想一想情景是什么，需要实现什么功能" class="headerlink" title="Scenario and Services (想一想情景是什么，需要实现什么功能)"></a>Scenario and Services (想一想情景是什么，需要实现什么功能)</h1><p><strong>情景决定功能</strong></p>
-<p><strong>A simple one will include these basic functions</strong></p>
-<ol>
-<li>User registration (用户注册) write op</li>
-<li>LogIn (登陆)</li>
-<li>Search for user information (查询) read op</li>
-<li>Store friendship info</li>
-</ol>
-<p><strong>The number of write op and read op will determine the design of system. When we want to design a system common used by user(people). it will have more read op than write op. Vice versa for machine used system.</strong><br><strong>人用的读多写少，机器用的写多读少</strong></p>
-<p><strong>DAU(Daily Active User)</strong><br><strong>QPS(Quries Per Seconds)</strong> 决定数据存储系统的选择<br><strong>一天的时间 86400s</strong> 为了计算方便可以 ~ 100k</p>
-<p><strong>注册，登录，信息修改 QPS 约</strong> </p>
-<ul>
-<li>100M * 0.1 / 86400 ~ 100 </li>
-<li>0.1 = 平均每个用户每天登录+注册+信息修改 </li>
-<li>Peak = 100 * 3 = 300 3 为预估值</li>
-</ul>
-<p><strong>查询的QPS 约</strong></p>
-<ul>
-<li>100 M * 100 / 86400 ~ 100k</li>
-<li>100 = 平均每个用户每天与查询用户信息相关的操作次数(查看好友，发信息，更新消息主页)</li>
-<li>Peak = 100k * 3 = 300 k</li>
-</ul>
-<h2 id="DataBase-Choice-based-by-QPS"><a href="#DataBase-Choice-based-by-QPS" class="headerlink" title="DataBase Choice based by QPS"></a>DataBase Choice based by QPS</h2><ul>
-<li>MySQL —— 1k (relation type)</li>
-<li>MongoDB / Cassandra —— 10k (disk type)</li>
-<li>Redis(数据持久化) / Memcached(非数据持久化) —— 100k ~ 1M (cache type)</li>
-</ul>
+            <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>大年初一，凌晨四点醒了等待新年睡不着，就总结一下，Trie 这个结构提供了前缀查找的可靠方法，要实现的代码也挺多的，还是要时常写一写的，这里就总结一下常见的Trie的题目。</p>
+<h1 id="Implement-Trie-Prefix-Tree"><a href="#Implement-Trie-Prefix-Tree" class="headerlink" title="Implement Trie (Prefix Tree)"></a>Implement Trie (Prefix Tree)</h1><p><a href="https://leetcode.com/problems/implement-trie-prefix-tree/description/" target="_blank" rel="noopener">Implement Trie (Prefix Tree)</a><br>这个题就是标准要实现一个Trie的结构，作为一个模板。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">class TrieNode &#123;</span><br><span class="line">    TrieNode[] children;</span><br><span class="line">    boolean hasWord;</span><br><span class="line">    public TrieNode() &#123;</span><br><span class="line">        this.children = new TrieNode[26];</span><br><span class="line">        this.hasWord = false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Trie &#123;</span><br><span class="line"></span><br><span class="line">    /** Initialize your data structure here. */</span><br><span class="line">    TrieNode root;</span><br><span class="line">    public Trie() &#123;</span><br><span class="line">        root = new TrieNode();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /** Inserts a word into the trie. */</span><br><span class="line">    public void insert(String word) &#123;</span><br><span class="line">        char[] wc = word.toCharArray();</span><br><span class="line">        TrieNode cur = root;</span><br><span class="line">        for (int i = 0; i &lt; wc.length; i++) &#123;</span><br><span class="line">            if (cur.children[wc[i] - &apos;a&apos;] == null) &#123;</span><br><span class="line">                cur.children[wc[i] - &apos;a&apos;] = new TrieNode();</span><br><span class="line">            &#125;</span><br><span class="line">            cur = cur.children[wc[i] - &apos;a&apos;];</span><br><span class="line">        &#125;</span><br><span class="line">        cur.hasWord = true;</span><br><span class="line">        return;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /** Returns if the word is in the trie. */</span><br><span class="line">    public boolean search(String word) &#123;</span><br><span class="line">        char[] wc = word.toCharArray();</span><br><span class="line">        TrieNode cur = root;</span><br><span class="line">        for (int i = 0; i &lt; wc.length; i++) &#123;</span><br><span class="line">            if (cur.children[wc[i] - &apos;a&apos;] == null) &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">            cur = cur.children[wc[i] - &apos;a&apos;];</span><br><span class="line">        &#125;</span><br><span class="line">        return cur.hasWord;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /** Returns if there is any word in the trie that starts with the given prefix. */</span><br><span class="line">    public boolean startsWith(String prefix) &#123;</span><br><span class="line">        char[] wc = prefix.toCharArray();</span><br><span class="line">        TrieNode cur = root;</span><br><span class="line">        for (int i = 0; i &lt; wc.length; i++) &#123;</span><br><span class="line">            if (cur.children[wc[i] - &apos;a&apos;] == null) &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">            cur = cur.children[wc[i] - &apos;a&apos;];</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Your Trie object will be instantiated and called as such:</span><br><span class="line"> * Trie obj = new Trie();</span><br><span class="line"> * obj.insert(word);</span><br><span class="line"> * boolean param_2 = obj.search(word);</span><br><span class="line"> * boolean param_3 = obj.startsWith(prefix);</span><br><span class="line"> */</span><br></pre></td></tr></table></figure></p>
 <hr>
-<ul>
-<li>读多写少的系统一定要用cache进行优化</li>
-<li>file system cpu client browser 都有cache</li>
-<li>优化DB查询<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class UserService:</span><br><span class="line">    </span><br><span class="line">    def getUser(self, user_id):</span><br><span class="line">        user = cache.get(user_id)</span><br><span class="line">        if user:</span><br><span class="line">            return user</span><br><span class="line">        user = database.get(user_id)</span><br><span class="line">        cache.set(user_id, user)</span><br><span class="line">        return user</span><br><span class="line"></span><br><span class="line">    def setUser(self, user) &#123;</span><br><span class="line">        cache.delete(user.id)</span><br><span class="line">        database.set(user)    </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
+<h1 id="Add-and-Search-Word-Data-structure-design"><a href="#Add-and-Search-Word-Data-structure-design" class="headerlink" title="Add and Search Word - Data structure design"></a>Add and Search Word - Data structure design</h1><p><a href="https://leetcode.com/problems/add-and-search-word-data-structure-design/description/" target="_blank" rel="noopener">Add and Search Word - Data structure design</a><br>这个题类似，不过要重写search函数，改为递归调用即可，注意加起始范围, 这个题还是多练练<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line">class TrieNode &#123;</span><br><span class="line">    TrieNode[] children;</span><br><span class="line">    boolean hasWord;</span><br><span class="line">    public TrieNode() &#123;</span><br><span class="line">        this.children = new TrieNode[26];</span><br><span class="line">        this.hasWord = false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class Trie &#123;</span><br><span class="line">    TrieNode root;</span><br><span class="line">    public Trie() &#123;</span><br><span class="line">        this.root = new TrieNode();</span><br><span class="line">    &#125;</span><br><span class="line">    public void insert(String word) &#123;</span><br><span class="line">        char[] wc = word.toCharArray();</span><br><span class="line">        TrieNode cur = root;</span><br><span class="line">        for (int i = 0; i &lt; wc.length; i++) &#123;</span><br><span class="line">            if (cur.children[wc[i] - &apos;a&apos;] == null) &#123;</span><br><span class="line">                cur.children[wc[i] - &apos;a&apos;] = new TrieNode();   </span><br><span class="line">            &#125;</span><br><span class="line">            cur = cur.children[wc[i] - &apos;a&apos;];</span><br><span class="line">        &#125;</span><br><span class="line">        cur.hasWord = true;</span><br><span class="line">    &#125;</span><br><span class="line">    public boolean search(String word) &#123;</span><br><span class="line">        char[] wc = word.toCharArray();</span><br><span class="line">        TrieNode cur = root;</span><br><span class="line">        return match(0, wc, cur);</span><br><span class="line">    &#125;</span><br><span class="line">    public boolean match(int start, char[] wc,  TrieNode cur) &#123;</span><br><span class="line">        if (cur == null) &#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = start; i &lt; wc.length; i++) &#123;</span><br><span class="line">            if (wc[i] == &apos;.&apos;) &#123;</span><br><span class="line">                boolean flag = false;</span><br><span class="line">                for (int j = 0; j &lt; 26; j++) &#123;</span><br><span class="line">                    flag = flag || match(i + 1, wc, cur.children[j]);</span><br><span class="line">                &#125;</span><br><span class="line">                return flag;</span><br><span class="line">            &#125; else if (cur.children[wc[i] - &apos;a&apos;] == null) &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">            cur = cur.children[wc[i] - &apos;a&apos;];</span><br><span class="line">        &#125;</span><br><span class="line">        return cur.hasWord;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class WordDictionary &#123;</span><br><span class="line"></span><br><span class="line">    /** Initialize your data structure here. */</span><br><span class="line">    Trie root;</span><br><span class="line">    public WordDictionary() &#123;</span><br><span class="line">        this.root = new Trie();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /** Adds a word into the data structure. */</span><br><span class="line">    public void addWord(String word) &#123;</span><br><span class="line">        this.root.insert(word);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /** Returns if the word is in the data structure. A word could contain the dot character &apos;.&apos; to represent any one letter. */</span><br><span class="line">    public boolean search(String word) &#123;</span><br><span class="line">        return root.search(word);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Your WordDictionary object will be instantiated and called as such:</span><br><span class="line"> * WordDictionary obj = new WordDictionary();</span><br><span class="line"> * obj.addWord(word);</span><br><span class="line"> * boolean param_2 = obj.search(word);</span><br><span class="line"> */</span><br></pre></td></tr></table></figure></p>
 <hr>
-<h2 id="Authentication-Service"><a href="#Authentication-Service" class="headerlink" title="Authentication Service"></a>Authentication Service</h2><h3 id="Session-amp-cookie"><a href="#Session-amp-cookie" class="headerlink" title="Session &amp; cookie"></a>Session &amp; cookie</h3><ol>
-<li>用户login之后会创建Session对象（server端）</li>
-<li>返回session_key值到browser</li>
-<li>这个值被browser记录在cookie中</li>
-<li>用户再次访问的时候会带上这个网站上所有的cookie（session_key）</li>
-<li>服务器检测session_key有效就认为用户登录</li>
-</ol>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th></th>
-<th><strong>SessionTable</strong></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>session key</td>
-<td>string</td>
-<td>hash值 全局唯一 无规律</td>
-</tr>
-<tr>
-<td>user_id</td>
-<td>foreign key</td>
-<td>指向 user table 用来找user</td>
-</tr>
-<tr>
-<td>expired_at</td>
-<td>timeStamp</td>
-<td>什么时候过期</td>
-</tr>
-</tbody>
-</table>
-</div>
-<ul>
-<li>这个table存在哪里都可以的，存在database可以持久一点，cache的话速度快 如果单点故障就让全部用户重新登录就好</li>
-</ul>
-<hr>
-<p><strong>读写都很多怎么办?</strong></p>
-<ol>
-<li>增加机器分摊流量</li>
-<li>使用Redis(cache-through) 读写都快 Memecached(cache-aside)</li>
-</ol>
-<ul>
-<li>cache-aside: DB 和 cache 通过web server 进行沟通 memcached + mysql</li>
-<li>cache-through: server只和cache沟通，cache和DB沟通 redis(DB + Cache)</li>
-</ul>
-<hr>
-<h1 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h1><h2 id="FriendShip-Service"><a href="#FriendShip-Service" class="headerlink" title="FriendShip Service"></a>FriendShip Service</h2><ol>
-<li>存为一条信息 查询一次</li>
-<li>存为两条信息 查询两次</li>
-</ol>
-<p><strong>NoSQL很多事都要自己去做，有transaction不能选择NoSQL</strong></p>
-<h3 id="Example-Cassandra"><a href="#Example-Cassandra" class="headerlink" title="Example Cassandra"></a>Example Cassandra</h3><ol>
-<li>row_key: hashKey</li>
-<li>column_key: sorted enable range query 可以是复合值 query(row_key, column_start, column_end)</li>
-<li>value: String 许多信息时 Serialization </li>
-</ol>
-<p><img src="https://github.com/wushangzhen/Useful-Pircture/blob/master/friendship.png?raw=true" alt="alt text" title="Friendship Example"></p>
-<p><strong>user table 用SQL</strong></p>
-<hr>
-<h1 id="Scale"><a href="#Scale" class="headerlink" title="Scale"></a>Scale</h1><h2 id="Single-point-failure"><a href="#Single-point-failure" class="headerlink" title="Single point failure"></a>Single point failure</h2><ul>
-<li>数据拆分 Sharding (NoSQL自带， MySQL不带)<br>  按照一定的规则，将数据拆分成不同的部分，保存在不同的机器上<br>  这样就算挂也不会导致网站 100% 不可用</li>
-<li>数据备份 Replica<br>  通常的做法是一式三份(重要的事情“写”三遍)<br>  Replica 同时还能分摊读请求</li>
-</ul>
-<ul>
-<li>vertical sharding 不同数据放到不同机器 </li>
-<li>Horizontal Sharding 重点！！！普通的hash分配数据时添加机器会发生数据大迁移, 这个属于nonconsistent hashing</li>
-</ul>
+<h1 id="Word-Search-II"><a href="#Word-Search-II" class="headerlink" title="Word Search II"></a>Word Search II</h1><p><a href="https://leetcode.com/problems/word-search-ii/description/" target="_blank" rel="noopener">Word Search II</a><br>先建Trie, 再DFS，DFS过程中要用startsWith降低复杂度，同时注意去重，可以搜索成功之后把hasWord变为false，也可以trienode加一个成员变量string 然后置空</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line">class TrieNode &#123;</span><br><span class="line">    TrieNode[] children;</span><br><span class="line">    boolean hasWord;</span><br><span class="line">    public TrieNode() &#123;</span><br><span class="line">        this.children = new TrieNode[26];</span><br><span class="line">        this.hasWord = false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class Trie &#123;</span><br><span class="line">    TrieNode root;</span><br><span class="line">    public Trie() &#123;</span><br><span class="line">        root = new TrieNode();</span><br><span class="line">    &#125;</span><br><span class="line">    public void insert(String word) &#123;</span><br><span class="line">        char[] wc = word.toCharArray();</span><br><span class="line">        TrieNode cur = root;</span><br><span class="line">        for (int i = 0; i &lt; wc.length; i++) &#123;</span><br><span class="line">            if (cur.children[wc[i] - &apos;a&apos;] == null) &#123;</span><br><span class="line">                cur.children[wc[i] - &apos;a&apos;] = new TrieNode();</span><br><span class="line">            &#125;</span><br><span class="line">            cur = cur.children[wc[i] - &apos;a&apos;];</span><br><span class="line">        &#125;</span><br><span class="line">        cur.hasWord = true;</span><br><span class="line">    &#125;</span><br><span class="line">    public boolean startsWith(String word) &#123;</span><br><span class="line">        char[] wc = word.toCharArray();</span><br><span class="line">        TrieNode cur = root;</span><br><span class="line">        for (int i = 0; i &lt; wc.length; i++) &#123;</span><br><span class="line">            if (cur.children[wc[i] - &apos;a&apos;] == null) &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">            cur = cur.children[wc[i] - &apos;a&apos;];</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">    public boolean search(String word) &#123;</span><br><span class="line">        char[] wc = word.toCharArray();</span><br><span class="line">        TrieNode cur = root;</span><br><span class="line">        for (int i = 0; i &lt; wc.length; i++) &#123;</span><br><span class="line">            if (cur.children[wc[i] - &apos;a&apos;] == null) &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">            cur = cur.children[wc[i] - &apos;a&apos;];</span><br><span class="line">        &#125;</span><br><span class="line">        boolean res = cur.hasWord;</span><br><span class="line">        cur.hasWord = false;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class Solution &#123;</span><br><span class="line">    public List&lt;String&gt; findWords(char[][] board, String[] words) &#123;</span><br><span class="line">        List&lt;String&gt; res = new ArrayList&lt;&gt;();</span><br><span class="line">        Trie trie = new Trie();</span><br><span class="line">        for (String word : words) &#123;</span><br><span class="line">            trie.insert(word);</span><br><span class="line">        &#125;</span><br><span class="line">        int n = board.length;</span><br><span class="line">        if (n == 0) &#123;</span><br><span class="line">            return new ArrayList&lt;&gt;();</span><br><span class="line">        &#125;</span><br><span class="line">        int m = board[0].length;</span><br><span class="line">        boolean[][] visited = new boolean[n][m];</span><br><span class="line">        for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            for (int j = 0; j &lt; m; j++) &#123;</span><br><span class="line">                dfs(&quot;&quot;, trie, res, i, j, board, visited);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">    public void dfs(String word, Trie trie, List&lt;String&gt; res, int x, int y, char[][] board, boolean[][] visited) &#123;</span><br><span class="line">        if (x &lt; 0 || x &gt;= board.length || y &lt; 0 || y &gt;= board[0].length || visited[x][y]) &#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        word += board[x][y];</span><br><span class="line">        if (!trie.startsWith(word)) &#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        if (trie.search(word)) &#123;</span><br><span class="line">            res.add(word);</span><br><span class="line">        &#125;</span><br><span class="line">        visited[x][y] = true;</span><br><span class="line">        dfs(word, trie, res, x + 1, y, board, visited);</span><br><span class="line">        dfs(word, trie, res, x - 1, y, board, visited);</span><br><span class="line">        dfs(word, trie, res, x, y + 1, board, visited);</span><br><span class="line">        dfs(word, trie, res, x, y - 1, board, visited);</span><br><span class="line">        visited[x][y] = false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
           
         
@@ -1003,7 +905,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
