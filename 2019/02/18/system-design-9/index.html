@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="This is a personal learning blog">
+<meta name="description" content="不经过服务器的话，无法处理离线消息语音视频聊天一般来说是p2p，但是也有可能会因为审查需要进行一些采样然后存到服务器。 一般是点开一个thread才会去获取Message Table的，上线的时候只会读取UserThread table取读取last message， unread_count之类的。 poll = periodically pull 还是不太明白participant hash">
 <meta name="keywords" content="Algorithm, Computer">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Shangzhen&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/archives/2019/02/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="System Design 9 Message System">
+<meta property="og:url" content="http://yoursite.com/2019/02/18/system-design-9/index.html">
 <meta property="og:site_name" content="Shangzhen&#39;s Blog">
-<meta property="og:description" content="This is a personal learning blog">
+<meta property="og:description" content="不经过服务器的话，无法处理离线消息语音视频聊天一般来说是p2p，但是也有可能会因为审查需要进行一些采样然后存到服务器。 一般是点开一个thread才会去获取Message Table的，上线的时候只会读取UserThread table取读取last message， unread_count之类的。 poll = periodically pull 还是不太明白participant hash">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-02-19T05:24:44.616Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Shangzhen&#39;s Blog">
-<meta name="twitter:description" content="This is a personal learning blog">
+<meta name="twitter:title" content="System Design 9 Message System">
+<meta name="twitter:description" content="不经过服务器的话，无法处理离线消息语音视频聊天一般来说是p2p，但是也有可能会因为审查需要进行一些采样然后存到服务器。 一般是点开一个thread才会去获取Message Table的，上线的时候只会读取UserThread table取读取last message， unread_count之类的。 poll = periodically pull 还是不太明白participant hash">
 
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2019/02/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/02/18/system-design-9/"/>
 
 
 
 
 
-  <title>Archive | Shangzhen's Blog</title>
+  <title>System Design 9 Message System | Shangzhen's Blog</title>
   
 
 
@@ -144,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -228,411 +229,171 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/18/system-design-9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shangzhen Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shangzhen's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">System Design 9 Message System</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-19T13:24:44+08:00">
+                2019-02-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        Um..! 16 posts in total. Keep on posting.
-      </span>
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SystemDesign/" itemprop="url" rel="index">
+                    <span itemprop="name">SystemDesign</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
 
-        
+          
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/02/24/dynamic-programing/" itemprop="url">
-              
-                <span itemprop="name">Dynamic Programming</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-02-25T09:58:41+08:00"
-              content="2019-02-25" >
-          02-25
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+          
 
+        </div>
+      </header>
+    
 
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/02/18/system-design-9/" itemprop="url">
-              
-                <span itemprop="name">System Design 9 Message System</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-02-19T13:24:44+08:00"
-              content="2019-02-19" >
-          02-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/02/14/system-design-8/" itemprop="url">
-              
-                <span itemprop="name">System Design 8 Map Reduce</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-02-14T18:17:22+08:00"
-              content="2019-02-14" >
-          02-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <p>不经过服务器的话，无法处理离线消息<br>语音视频聊天一般来说是p2p，但是也有可能会因为审查需要进行一些采样然后存到服务器。</p>
+<p>一般是点开一个thread才会去获取Message Table的，上线的时候只会读取UserThread table取读取last message， unread_count之类的。</p>
+<p>poll = periodically pull</p>
+<p>还是不太明白participant hash code有什么用，用户在app里发消息的时候app不会告诉server是在哪个thread id里发吗？ 因为即使是同一批participants也可以有多个thread<br>主要用途是：比如说A想给B发一个消息，那么首先需要知道A跟B之前有没有建立过thread，如果有的话就应该延用之前的thread id，这个时候就需要用A+B作为key去查询一下双方之前是否已经建立过thread。至于多人群聊，可以hash(participants+群聊名称)作为key。</p>
+<p>index存在磁盘里，但是工作的时候会有一部分被load到内存里面。</p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/02/14/computer-system-elf/" itemprop="url">
-              
-                <span itemprop="name">Computer System 1 - Elf Info Reader</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-02-14T17:14:58+08:00"
-              content="2019-02-14" >
-          02-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/02/14/system-design-7/" itemprop="url">
-              
-                <span itemprop="name">System Design 7</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-02-14T17:14:29+08:00"
-              content="2019-02-14" >
-          02-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/02/14/system-design-6/" itemprop="url">
-              
-                <span itemprop="name">System Design 6 Distributed System</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-02-14T17:14:20+08:00"
-              content="2019-02-14" >
-          02-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/02/14/system-design-5/" itemprop="url">
-              
-                <span itemprop="name">System Design 5 - Web Crawler & TypeHead</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-02-14T17:14:09+08:00"
-              content="2019-02-14" >
-          02-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/02/13/system-design-2/" itemprop="url">
-              
-                <span itemprop="name">System Design 2 Design User System - DataBase & Memcache</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-02-14T13:32:26+08:00"
-              content="2019-02-14" >
-          02-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/02/13/graph/" itemprop="url">
-              
-                <span itemprop="name">Graph Theory - BFS & Union Find & Others</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-02-14T13:23:30+08:00"
-              content="2019-02-14" >
-          02-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/02/13/time-complexity/" itemprop="url">
-              
-                <span itemprop="name">Complexity</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-02-13T16:57:41+08:00"
-              content="2019-02-13" >
-          02-13
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/14/system-design-8/" rel="next" title="System Design 8 Map Reduce">
+                <i class="fa fa-chevron-left"></i> System Design 8 Map Reduce
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/24/dynamic-programing/" rel="prev" title="Dynamic Programming">
+                Dynamic Programming <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/2019/02/page/2/">2</a><a class="extend next" rel="next" href="/archives/2019/02/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -640,6 +401,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -845,6 +610,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

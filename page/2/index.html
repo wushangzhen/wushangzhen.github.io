@@ -243,6 +243,157 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/11/interview1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shangzhen Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shangzhen's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/11/interview1/" itemprop="url">C & C++ 1</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-11T18:19:49+08:00">
+                2019-02-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Interview/" itemprop="url" rel="index">
+                    <span itemprop="name">Interview</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="指针变量引用"><a href="#指针变量引用" class="headerlink" title="指针变量引用"></a>指针变量引用</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int a = 1;</span><br><span class="line">int b = 10;</span><br><span class="line">int* p = &amp;a;</span><br><span class="line">int* &amp;pa = p;</span><br><span class="line">(*pa)++; //这里的pa是p的引用，对pa指向的内容+1，a = 2</span><br><span class="line">pa = &amp;b; //pa指向b的地址，由于pa是p的引用，所以p也指向b的地址 b = 11</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="指针初始化"><a href="#指针初始化" class="headerlink" title="指针初始化"></a>指针初始化</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int* p </span><br><span class="line">*p = 5 // 因为p没有初始化，所以p是野指针，经常导致程序崩溃</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="临时变量非法引用"><a href="#临时变量非法引用" class="headerlink" title="临时变量非法引用"></a>临时变量非法引用</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const float pi = 3.14;</span><br><span class="line">float f;</span><br><span class="line">float f1(float r) &#123;</span><br><span class="line">    f = r * r * pi;</span><br><span class="line">    return f;    </span><br><span class="line">&#125;</span><br><span class="line">float&amp; f2(float r) &#123;</span><br><span class="line">    f = r * r * pi;</span><br><span class="line">    return f; // 返回f的引用    </span><br><span class="line">&#125;</span><br><span class="line">int main() &#123;</span><br><span class="line">    float f1(float r = 5);</span><br><span class="line">    float&amp; f2(float r = 5); //声明函数的默认参数调用，默认参数为5</span><br><span class="line">    float a = f1(); </span><br><span class="line">    float&amp; b = f1(); // 错误，f1里面计算的值会付给一个temp的临时变量，临时变量是无法建立引用的</span><br><span class="line">    float c = f2(); // 正确，返回全局变量f的引用</span><br><span class="line">    float&amp; d = f2(); // 正确，主函数不定义变量而是直接使用f的引用的方式，最节省内存空间的方式，注意有效期的问题 </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="常量引用"><a href="#常量引用" class="headerlink" title="常量引用"></a>常量引用</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int a = 5;</span><br><span class="line">const int&amp; b = a;</span><br><span class="line">b = 1 // 错误，无法更改, 这样就可以向外暴露一个只读的接口值</span><br><span class="line">a = 1 //正确</span><br><span class="line"></span><br><span class="line">const int c = 5;</span><br><span class="line">int&amp; d = c //错误，必须是常量引用才可以，const int&amp; d = c</span><br></pre></td></tr></table></figure>
+<p><strong>_常量必须用常量引用，非常量也可以用常量引用_</strong></p>
+<hr>
+<h1 id="指针和引用"><a href="#指针和引用" class="headerlink" title="指针和引用"></a>指针和引用</h1><p>引用一般是用指针实现的，引用安全，一旦赋值不可能更改。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/11/ListNode/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1075,7 +1226,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

@@ -243,7 +243,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/15/dynamic-programing/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/24/dynamic-programing/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shangzhen Wu">
@@ -262,7 +262,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/02/15/dynamic-programing/" itemprop="url">Dynamic Programming</a></h1>
+                <a class="post-title-link" href="/2019/02/24/dynamic-programing/" itemprop="url">Dynamic Programming</a></h1>
         
 
         <div class="post-meta">
@@ -274,8 +274,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-15T17:39:07-08:00">
-                2019-02-16
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-25T09:58:41+08:00">
+                2019-02-25
               </time>
             
 
@@ -360,6 +360,156 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int numDecodings(String s) &#123;</span><br><span class="line">        if (s == null || s.length() == 0) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        int n = s.length();</span><br><span class="line">        int[] dp = new int[n + 1];</span><br><span class="line">        dp[0] = 1;</span><br><span class="line">        if (s.charAt(0) == &apos;0&apos;) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        dp[1] = 1;</span><br><span class="line">        for (int i = 2; i &lt;= n; i++) &#123;</span><br><span class="line">            if (s.charAt(i - 1) == &apos;0&apos;) &#123;</span><br><span class="line">                if (s.charAt(i - 2) == &apos;1&apos; || s.charAt(i - 2) == &apos;2&apos;) &#123;</span><br><span class="line">                    dp[i] = dp[i - 2];</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    continue;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; else if (s.charAt(i - 2) == &apos;1&apos; || (s.charAt(i - 2) == &apos;2&apos; &amp;&amp; s.charAt(i - 1) &lt; &apos;7&apos;)) &#123;</span><br><span class="line">                dp[i] = dp[i - 1] + dp[i - 2];</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                dp[i] = dp[i - 1];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
 <h1 id="Unique-Binary-Search-Trees"><a href="#Unique-Binary-Search-Trees" class="headerlink" title="Unique Binary Search Trees"></a>Unique Binary Search Trees</h1><p><a href="https://leetcode.com/problems/unique-binary-search-trees/description/" target="_blank" rel="noopener">Unique Binary Search Trees</a><br>卡特兰树，<a href="http://www.cnblogs.com/grandyang/p/4299608.html" target="_blank" rel="noopener">参考</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int numTrees(int n) &#123;</span><br><span class="line">        int[] dp = new int[n + 1];</span><br><span class="line">        dp[0] = 1;</span><br><span class="line">        dp[1] = 1;</span><br><span class="line">        for (int i = 2; i &lt;= n; i++) &#123;</span><br><span class="line">            for (int j = 0; j &lt; i; j++) &#123;</span><br><span class="line">                dp[i] += dp[j] * dp[i - j - 1];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="Interleaving-String"><a href="#Interleaving-String" class="headerlink" title="Interleaving String"></a>Interleaving String</h1><p><a href="https://leetcode.com/problems/interleaving-string/description/" target="_blank" rel="noopener">Interleaving String</a><br>这个题类似像regular expression match可以采用记忆化搜索top-down的方法，每一个位置枚举可能出现的值，类似序列型动态规划，建议十遍。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public boolean isInterleave(String s1, String s2, String s3) &#123;</span><br><span class="line">        int memo[][] = new int[s1.length()][s2.length()];</span><br><span class="line">        for (int i = 0; i &lt; s1.length(); i++) &#123;</span><br><span class="line">            for (int j = 0; j &lt; s2.length(); j++) &#123;</span><br><span class="line">                memo[i][j] = -1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return helper(s1, 0, s2, 0, s3, 0, memo);</span><br><span class="line">    &#125;</span><br><span class="line">    public boolean helper(String s1, int i, String s2, int j, String s3, int k, int[][] memo) &#123;</span><br><span class="line">        if (i == s1.length()) &#123;</span><br><span class="line">            return s2.substring(j).equals(s3.substring(k));</span><br><span class="line">        &#125;</span><br><span class="line">        if (j == s2.length()) &#123;</span><br><span class="line">            return s1.substring(i).equals(s3.substring(k));</span><br><span class="line">        &#125;</span><br><span class="line">        if (memo[i][j] &gt;= 0) &#123;</span><br><span class="line">            return memo[i][j] == 1 ? true : false;</span><br><span class="line">        &#125;</span><br><span class="line">        boolean ans = false;</span><br><span class="line">        if ((s3.charAt(k) == s1.charAt(i) &amp;&amp; helper(s1, i + 1, s2, j, s3, k + 1, memo)) </span><br><span class="line">             || (s3.charAt(k) == s2.charAt(j) &amp;&amp; helper(s1, i, s2, j + 1, s3, k + 1, memo))) &#123;</span><br><span class="line">            ans = true;</span><br><span class="line">        &#125;</span><br><span class="line">        memo[i][j] = ans ? 1 : 0;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="Distinct-Subsequences"><a href="#Distinct-Subsequences" class="headerlink" title="Distinct Subsequences"></a>Distinct Subsequences</h1><p><a href="https://leetcode.com/problems/distinct-subsequences/description/" target="_blank" rel="noopener">Distinct Subsequences</a><br>和上题类似，是区间型型动态规划，并不好想。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int numDistinct(String s, String t) &#123;</span><br><span class="line">        int n = s.length();</span><br><span class="line">        int m = t.length();</span><br><span class="line">        int[][] memo = new int[n + 1][m + 1];</span><br><span class="line">        for (int i = 0; i &lt;= n; i++) &#123;</span><br><span class="line">            memo[i][0] = 1;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int j = 1; j &lt;= m; j++) &#123;</span><br><span class="line">            for (int i = 1; i &lt;= n; i++) &#123;</span><br><span class="line">                if (s.charAt(i - 1) == t.charAt(j - 1)) &#123;</span><br><span class="line">                    memo[i][j] = memo[i - 1][j - 1] + memo[i - 1][j]; // 如果相等，就是有两种情况，i-1变成j，i-1变成j-1，加起来就行</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    memo[i][j] = memo[i - 1][j];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return memo[n][m];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/18/system-design-9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shangzhen Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shangzhen's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/18/system-design-9/" itemprop="url">System Design 9 Message System</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-19T13:24:44+08:00">
+                2019-02-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SystemDesign/" itemprop="url" rel="index">
+                    <span itemprop="name">SystemDesign</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>不经过服务器的话，无法处理离线消息<br>语音视频聊天一般来说是p2p，但是也有可能会因为审查需要进行一些采样然后存到服务器。</p>
+<p>一般是点开一个thread才会去获取Message Table的，上线的时候只会读取UserThread table取读取last message， unread_count之类的。</p>
+<p>poll = periodically pull</p>
+<p>还是不太明白participant hash code有什么用，用户在app里发消息的时候app不会告诉server是在哪个thread id里发吗？ 因为即使是同一批participants也可以有多个thread<br>主要用途是：比如说A想给B发一个消息，那么首先需要知道A跟B之前有没有建立过thread，如果有的话就应该延用之前的thread id，这个时候就需要用A+B作为key去查询一下双方之前是否已经建立过thread。至于多人群聊，可以hash(participants+群聊名称)作为key。</p>
+<p>index存在磁盘里，但是工作的时候会有一部分被load到内存里面。</p>
 
           
         
@@ -1545,7 +1695,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-13T21:23:30-08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-14T13:23:30+08:00">
                 2019-02-14
               </time>
             
@@ -1904,157 +2054,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/11/interview1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shangzhen Wu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Shangzhen's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/11/interview1/" itemprop="url">C & C++ 1</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-11T18:19:49+08:00">
-                2019-02-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Interview/" itemprop="url" rel="index">
-                    <span itemprop="name">Interview</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="指针变量引用"><a href="#指针变量引用" class="headerlink" title="指针变量引用"></a>指针变量引用</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int a = 1;</span><br><span class="line">int b = 10;</span><br><span class="line">int* p = &amp;a;</span><br><span class="line">int* &amp;pa = p;</span><br><span class="line">(*pa)++; //这里的pa是p的引用，对pa指向的内容+1，a = 2</span><br><span class="line">pa = &amp;b; //pa指向b的地址，由于pa是p的引用，所以p也指向b的地址 b = 11</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="指针初始化"><a href="#指针初始化" class="headerlink" title="指针初始化"></a>指针初始化</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int* p </span><br><span class="line">*p = 5 // 因为p没有初始化，所以p是野指针，经常导致程序崩溃</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="临时变量非法引用"><a href="#临时变量非法引用" class="headerlink" title="临时变量非法引用"></a>临时变量非法引用</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const float pi = 3.14;</span><br><span class="line">float f;</span><br><span class="line">float f1(float r) &#123;</span><br><span class="line">    f = r * r * pi;</span><br><span class="line">    return f;    </span><br><span class="line">&#125;</span><br><span class="line">float&amp; f2(float r) &#123;</span><br><span class="line">    f = r * r * pi;</span><br><span class="line">    return f; // 返回f的引用    </span><br><span class="line">&#125;</span><br><span class="line">int main() &#123;</span><br><span class="line">    float f1(float r = 5);</span><br><span class="line">    float&amp; f2(float r = 5); //声明函数的默认参数调用，默认参数为5</span><br><span class="line">    float a = f1(); </span><br><span class="line">    float&amp; b = f1(); // 错误，f1里面计算的值会付给一个temp的临时变量，临时变量是无法建立引用的</span><br><span class="line">    float c = f2(); // 正确，返回全局变量f的引用</span><br><span class="line">    float&amp; d = f2(); // 正确，主函数不定义变量而是直接使用f的引用的方式，最节省内存空间的方式，注意有效期的问题 </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="常量引用"><a href="#常量引用" class="headerlink" title="常量引用"></a>常量引用</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int a = 5;</span><br><span class="line">const int&amp; b = a;</span><br><span class="line">b = 1 // 错误，无法更改, 这样就可以向外暴露一个只读的接口值</span><br><span class="line">a = 1 //正确</span><br><span class="line"></span><br><span class="line">const int c = 5;</span><br><span class="line">int&amp; d = c //错误，必须是常量引用才可以，const int&amp; d = c</span><br></pre></td></tr></table></figure>
-<p><strong>_常量必须用常量引用，非常量也可以用常量引用_</strong></p>
-<hr>
-<h1 id="指针和引用"><a href="#指针和引用" class="headerlink" title="指针和引用"></a>指针和引用</h1><p>引用一般是用指针实现的，引用安全，一旦赋值不可能更改。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2105,7 +2104,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
