@@ -8,8 +8,16 @@
     </url>
 
     <url>
-        <loc>http://yoursite.com/2019/02/24/dynamic-programing/</loc>
-        <lastmod>2019-02-25T01:58:41.487Z</lastmod>
+        <loc>http://yoursite.com/2019/02/25/dynamic-programing/</loc>
+        <lastmod>2019-02-26T01:11:34.487Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/2019/02/24/database/</loc>
+        <lastmod>2019-02-25T07:47:43.056Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

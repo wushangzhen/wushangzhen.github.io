@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Introduction动态规划是必须要掌握的算法，去年上过关于动态规划的专题班，但是没有更深一步的总结，这一轮刷题的时候还是要深入的总结一下动态规划的常见题型，常见的动态规划算法有两种，一种top down主要代表就是记忆化搜索，另一种是bottomup这种其实就是递推公式类型的，先把LeetCode上关于动态规划的常见题型总结一下。 Longest Palindromic SubstringL">
+<meta name="keywords" content="Algorithm, Computer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dynamic Programming">
+<meta property="og:url" content="http://yoursite.com/2019/02/25/dynamic-programing/index.html">
+<meta property="og:site_name" content="Shangzhen&#39;s Blog">
+<meta property="og:description" content="Introduction动态规划是必须要掌握的算法，去年上过关于动态规划的专题班，但是没有更深一步的总结，这一轮刷题的时候还是要深入的总结一下动态规划的常见题型，常见的动态规划算法有两种，一种top down主要代表就是记忆化搜索，另一种是bottomup这种其实就是递推公式类型的，先把LeetCode上关于动态规划的常见题型总结一下。 Longest Palindromic SubstringL">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-02-26T01:11:34.487Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Dynamic Programming">
+<meta name="twitter:description" content="Introduction动态规划是必须要掌握的算法，去年上过关于动态规划的专题班，但是没有更深一步的总结，这一轮刷题的时候还是要深入的总结一下动态规划的常见题型，常见的动态规划算法有两种，一种top down主要代表就是记忆化搜索，另一种是bottomup这种其实就是递推公式类型的，先把LeetCode上关于动态规划的常见题型总结一下。 Longest Palindromic SubstringL">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/25/dynamic-programing/"/>
+
+
+
+
+
+  <title>Dynamic Programming | Shangzhen's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shangzhen's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/25/dynamic-programing/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shangzhen Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shangzhen's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Dynamic Programming</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-25T17:11:34-08:00">
+                2019-02-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>动态规划是必须要掌握的算法，去年上过关于动态规划的专题班，但是没有更深一步的总结，这一轮刷题的时候还是要深入的总结一下动态规划的常见题型，常见的动态规划算法有两种，一种top down主要代表就是记忆化搜索，另一种是bottomup这种其实就是递推公式类型的，先把LeetCode上关于动态规划的常见题型总结一下。</p>
+<h1 id="Longest-Palindromic-Substring"><a href="#Longest-Palindromic-Substring" class="headerlink" title="Longest Palindromic Substring"></a>Longest Palindromic Substring</h1><p><a href="https://leetcode.com/problems/longest-palindromic-substring/description/" target="_blank" rel="noopener">Longest Palindromic Substring</a><br>区间型动态规划,空间复杂度O(n^2), 也可以用字符串扩展的方法实现O(1)空间复杂度</p>
+<p>dp<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public String longestPalindrome(String s) &#123;</span><br><span class="line">        if (s == null || s.length() == 0) &#123;</span><br><span class="line">            return &quot;&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        char[] sc = s.toCharArray();</span><br><span class="line">        int n = sc.length;</span><br><span class="line">        boolean[][] dp = new boolean[n][n];</span><br><span class="line">        int start = 0;</span><br><span class="line">        int max = 0;</span><br><span class="line">        for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            dp[i][i] = true;</span><br><span class="line">            for (int j = i; j &gt;= 0; j--) &#123;</span><br><span class="line">                if ((j + 2 &gt; i || dp[j + 1][i - 1]) &amp;&amp; sc[i] == sc[j]) &#123;</span><br><span class="line">                    dp[j][i] = true;</span><br><span class="line">                    if (i - j + 1 &gt; max) &#123;</span><br><span class="line">                        start = j;</span><br><span class="line">                        max = i - j + 1;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return s.substring(start, start + max);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>字符串扩展<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public String longestPalindrome(String s) &#123;</span><br><span class="line">        if (s == null || s.length() == 0) &#123;</span><br><span class="line">            return &quot;&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        char[] sc = s.toCharArray();</span><br><span class="line">        int n = sc.length;</span><br><span class="line">        int start = -1;</span><br><span class="line">        int max = 0;</span><br><span class="line">        for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            int len1 = expand(sc, i, i);</span><br><span class="line">            int len2 = expand(sc, i, i + 1);</span><br><span class="line">            if (len1 &gt; max) &#123;</span><br><span class="line">                start = i - len1 / 2;</span><br><span class="line">                max = len1;</span><br><span class="line">            &#125;</span><br><span class="line">            if (len2 &gt; max) &#123;</span><br><span class="line">                start = i - (len2 - 1) / 2;</span><br><span class="line">                max = len2;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return s.substring(start, start + max);</span><br><span class="line">    &#125;</span><br><span class="line">    int expand(char[] sc, int i, int j) &#123;</span><br><span class="line">        while (i &gt;= 0 &amp;&amp; j &lt; sc.length) &#123;</span><br><span class="line">            if (sc[i] == sc[j]) &#123;</span><br><span class="line">                i--;</span><br><span class="line">                j++;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return j - i - 1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="Longest-Palindromic-Subsequence"><a href="#Longest-Palindromic-Subsequence" class="headerlink" title="Longest Palindromic Subsequence"></a>Longest Palindromic Subsequence</h1><p><a href="https://leetcode.com/problems/longest-palindromic-subsequence/description/" target="_blank" rel="noopener">Longest Palindromic Subsequence</a><br>区间型动态规划, 这题求的是subsequence，代表这个区间内最长的子序列，可以不以i结尾。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int longestPalindromeSubseq(String s) &#123;</span><br><span class="line">        if (s == null || s.length() == 0) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        int n = s.length();</span><br><span class="line">        int[][] dp = new int[n][n];</span><br><span class="line">        for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            dp[i][i] = 1; // 初始化</span><br><span class="line">            for (int j = i - 1; j &gt;= 0; j--) &#123;</span><br><span class="line">                dp[j][i] = Math.max(dp[j][i - 1], dp[j + 1][i]); // 先比较dp[j][i - 1], dp[j + 1][i]取最大值</span><br><span class="line">                if (s.charAt(i) == s.charAt(j)) &#123;</span><br><span class="line">                    dp[j][i] = Math.max(dp[j + 1][i - 1] + 2, dp[j][i]); // 如果相同就加上。</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[0][n - 1];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="Regular-Expression-Matching"><a href="#Regular-Expression-Matching" class="headerlink" title="Regular Expression Matching"></a>Regular Expression Matching</h1><p><a href="https://leetcode.com/problems/regular-expression-matching/description/" target="_blank" rel="noopener">Regular Expression Matching</a><br>双序列型动态规划，这个题属于记忆化搜索，也是dp的一种，我们要做的事，建立一个visited数组和results数组记录结构，用两根指针来记录遍历位置，注意终止条件, 建议做十遍。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public boolean isMatch(String s, String p) &#123;</span><br><span class="line">        int n = s.length();</span><br><span class="line">        int m = p.length();</span><br><span class="line">        char[] sc = s.toCharArray();</span><br><span class="line">        char[] pc = p.toCharArray();</span><br><span class="line">        boolean[][] visited = new boolean[n][m];</span><br><span class="line">        boolean[][] results = new boolean[n][m];</span><br><span class="line">        return helper(0, 0, sc, pc, visited, results);</span><br><span class="line">    &#125;</span><br><span class="line">    boolean helper(int ps, int pp, char[] sc, char[] pc, boolean[][] visited, boolean[][] results) &#123;</span><br><span class="line">        if (pp == pc.length) &#123;</span><br><span class="line">            return ps == sc.length; // it has to be end</span><br><span class="line">        &#125;</span><br><span class="line">        if (ps == sc.length) &#123;</span><br><span class="line">            return isAllStar(pp, pc); // has to follow the pattern</span><br><span class="line">        &#125;</span><br><span class="line">        if (visited[ps][pp]) &#123;</span><br><span class="line">            return results[ps][pp];</span><br><span class="line">        &#125;</span><br><span class="line">        boolean match = false;</span><br><span class="line">        if (pp + 1 &lt; pc.length &amp;&amp; pc[pp + 1] == &apos;*&apos;) &#123; // regard a* as a part </span><br><span class="line">            match = helper(ps, pp + 2, sc, pc, visited, results) || ((sc[ps] == pc[pp] || pc[pp] == &apos;.&apos;) &amp;&amp; helper(ps + 1, pp, sc, pc, visited, results));</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            match = (pc[pp] == sc[ps] || pc[pp] == &apos;.&apos;) &amp;&amp; helper(ps + 1, pp + 1, sc, pc, visited, results);</span><br><span class="line">        &#125;// it is the only way to make it right</span><br><span class="line">        visited[ps][pp] = true;</span><br><span class="line">        results[ps][pp] = match;</span><br><span class="line">        return match;</span><br><span class="line">    &#125;</span><br><span class="line">                                                                     </span><br><span class="line">    boolean isAllStar(int pp, char[] pc) &#123;</span><br><span class="line">        int count = 0;</span><br><span class="line">        for (int i = pp; i &lt; pc.length; i++) &#123;</span><br><span class="line">            if (count % 2 == 0) &#123;</span><br><span class="line">                if (pc[i] == &apos;*&apos;) &#123;</span><br><span class="line">                    return false;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    count++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                if (pc[i] == &apos;*&apos;) &#123;</span><br><span class="line">                    count++;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    return false;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return count % 2 == 0;</span><br><span class="line">    &#125;</span><br><span class="line">                                                                    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="Wildcard-Matching"><a href="#Wildcard-Matching" class="headerlink" title="Wildcard Matching"></a>Wildcard Matching</h1><p><a href="https://leetcode.com/problems/wildcard-matching/description/" target="_blank" rel="noopener">Wildcard Matching</a><br>这个题比上一个题要简单一点，但是大致思路是一样的，记忆化搜索，bugfree<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public boolean isMatch(String s, String p) &#123;</span><br><span class="line">        int n = s.length();</span><br><span class="line">        int m = p.length();</span><br><span class="line">        boolean[][] visited = new boolean[n][m];</span><br><span class="line">        boolean[][] results = new boolean[n][m];</span><br><span class="line">        char[] sc = s.toCharArray();</span><br><span class="line">        char[] pc = p.toCharArray();</span><br><span class="line">        return helper(0, 0, sc, pc, visited, results);</span><br><span class="line">    &#125;</span><br><span class="line">    boolean helper(int p1, int p2, char[] sc, char[] pc, boolean[][] visited, boolean[][] results) &#123;</span><br><span class="line">        if (p2 == pc.length) &#123;</span><br><span class="line">            return p1 == sc.length;</span><br><span class="line">        &#125;</span><br><span class="line">        if (p1 == sc.length) &#123;</span><br><span class="line">            return isAllStar(p2, pc);</span><br><span class="line">        &#125;</span><br><span class="line">        if (visited[p1][p2]) &#123;</span><br><span class="line">            return results[p1][p2];</span><br><span class="line">        &#125;</span><br><span class="line">        boolean match = false;</span><br><span class="line">        if (pc[p2] == &apos;*&apos;) &#123;</span><br><span class="line">            match = helper(p1 + 1, p2, sc, pc, visited, results) || helper(p1, p2 + 1, sc, pc, visited, results);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            match = ((sc[p1] == pc[p2] || pc[p2] == &apos;?&apos;) &amp;&amp; helper(p1 + 1, p2 + 1, sc, pc, visited, results));</span><br><span class="line">        &#125;</span><br><span class="line">        visited[p1][p2] = true;</span><br><span class="line">        results[p1][p2] = match;</span><br><span class="line">        return match;</span><br><span class="line">    &#125;</span><br><span class="line">    boolean isAllStar(int p, char[] pc) &#123;</span><br><span class="line">        for (int i = p; i &lt; pc.length; i++) &#123;</span><br><span class="line">            if (pc[i] != &apos;*&apos;) &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="Longest-Valid-Parentheses"><a href="#Longest-Valid-Parentheses" class="headerlink" title="Longest Valid Parentheses"></a>Longest Valid Parentheses</h1><p><a href="https://leetcode.com/problems/longest-valid-parentheses/description/" target="_blank" rel="noopener">Longest Valid Parentheses</a><br>序列型动态规划，注意递推条件，遍历，如果遇到 ( 或者 j = i - dp[i - 1] - 1 &lt; 0 或者 sc[j] == )都continue掉，代表以i-1结尾的字符不能构成valid parenthesis。其他的都是dp[i] = 2 + dp[i - 1] + dp[j];<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int longestValidParentheses(String s) &#123;</span><br><span class="line">        if (s == null || s.length() == 0) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        int n = s.length();</span><br><span class="line">        int[] dp = new int[n + 1];</span><br><span class="line">        dp[0] = 0;</span><br><span class="line">        int res = 0;</span><br><span class="line">        for (int i = 1; i &lt;= n; i++) &#123;</span><br><span class="line">            int j = i - dp[i - 1] - 2;</span><br><span class="line">            if (s.charAt(i - 1) == &apos;(&apos; || j &lt; 0 || s.charAt(j) == &apos;)&apos;) &#123;</span><br><span class="line">                dp[i] = 0;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                dp[i] = dp[i - 1] + dp[j] + 2;</span><br><span class="line">                res = Math.max(dp[i], res);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="Edit-Distance"><a href="#Edit-Distance" class="headerlink" title="Edit Distance"></a>Edit Distance</h1><p><a href="https://leetcode.com/problems/edit-distance/description/" target="_blank" rel="noopener">Edit Distance</a><br>这个题是双序列型动态规划, 三种情况分别算，初始条件搞清楚。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i][j] 表示word1前i个变为word2前j个所需的操作数。</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minDistance(String word1, String word2) &#123;</span><br><span class="line">        int n = word1.length();</span><br><span class="line">        int m = word2.length();</span><br><span class="line">        int[][] dp = new int[n + 1][m + 1];</span><br><span class="line">        dp[0][0] = 0;</span><br><span class="line">        for (int i = 0; i &lt;= n; i++) &#123;</span><br><span class="line">            for (int j = 0; j &lt;= m; j++) &#123;</span><br><span class="line">                if (i == 0) &#123;</span><br><span class="line">                    dp[i][j] = j;</span><br><span class="line">                    continue;</span><br><span class="line">                &#125;</span><br><span class="line">                if (j == 0) &#123;</span><br><span class="line">                    dp[i][j] = i;</span><br><span class="line">                    continue;</span><br><span class="line">                &#125;</span><br><span class="line">                if (word1.charAt(i - 1) == word2.charAt(j - 1)) &#123;</span><br><span class="line">                    dp[i][j] = dp[i - 1][j - 1]; // 不用改变</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    dp[i][j] = dp[i - 1][j - 1] + 1; // replace</span><br><span class="line">                &#125; </span><br><span class="line">                dp[i][j] = Math.min(dp[i - 1][j] + 1, dp[i][j]); // add</span><br><span class="line">                dp[i][j] = Math.min(dp[i][j - 1] + 1, dp[i][j]); // delete</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[n][m];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以用滚动数组优化空间复杂度O(n)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minDistance(String word1, String word2) &#123;</span><br><span class="line">        int n = word1.length();</span><br><span class="line">        int m = word2.length();</span><br><span class="line">        int[][] dp = new int[2][m + 1];</span><br><span class="line">        int old = 0;</span><br><span class="line">        int cur = 1; // rolling array</span><br><span class="line">        dp[0][0] = 0;</span><br><span class="line">        for (int i = 0; i &lt;= n; i++) &#123;</span><br><span class="line">            old = cur;</span><br><span class="line">            cur = 1 - cur;</span><br><span class="line">            for (int j = 0; j &lt;= m; j++) &#123;</span><br><span class="line">                if (i == 0) &#123;</span><br><span class="line">                    dp[cur][j] = j;</span><br><span class="line">                    continue;</span><br><span class="line">                &#125;</span><br><span class="line">                if (j == 0) &#123;</span><br><span class="line">                    dp[cur][j] = i;</span><br><span class="line">                    continue;</span><br><span class="line">                &#125;</span><br><span class="line">                if (word1.charAt(i - 1) == word2.charAt(j - 1)) &#123;</span><br><span class="line">                    dp[cur][j] = dp[old][j - 1];</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    dp[cur][j] = dp[old][j - 1] + 1;</span><br><span class="line">                &#125; </span><br><span class="line">                dp[cur][j] = Math.min(dp[old][j] + 1, dp[cur][j]);</span><br><span class="line">                dp[cur][j] = Math.min(dp[cur][j - 1] + 1, dp[cur][j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[cur][m];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="Scramble-String"><a href="#Scramble-String" class="headerlink" title="Scramble String"></a>Scramble String</h1><p><a href="https://leetcode.com/problems/scramble-string/description/" target="_blank" rel="noopener">Scramble String</a><br>记忆化搜索，分段递归， 但是这个方法效率很低，下次可以看一个比较快的方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    Map&lt;String, Boolean&gt; memo = new HashMap&lt;&gt;();</span><br><span class="line">    public boolean isScramble(String s1, String s2) &#123;</span><br><span class="line">        if (s1.length() != s2.length()) &#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        if (s1.equals(s2)) &#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        if (memo.containsKey(s1 + &quot;#&quot; + s2)) &#123;</span><br><span class="line">            return memo.get(s1 + &quot;#&quot; + s2);</span><br><span class="line">        &#125;</span><br><span class="line">        if (s1.length() == 1) &#123;</span><br><span class="line">            return s1.charAt(0) == s2.charAt(0);</span><br><span class="line">        &#125;</span><br><span class="line">        int n = s1.length();</span><br><span class="line">        // great</span><br><span class="line">        // eatgr</span><br><span class="line">        for (int i = 1; i &lt; n; i++) &#123; // 不能 i &lt;= n 这样的话总是会判断s1 和 s2不能重复</span><br><span class="line">            if ((isScramble(s1.substring(0, i), s2.substring(0, i)) </span><br><span class="line">               &amp;&amp; isScramble(s1.substring(i), s2.substring(i)))</span><br><span class="line">               || (isScramble(s1.substring(0, i), s2.substring(n - i)) </span><br><span class="line">               &amp;&amp; isScramble(s1.substring(i), s2.substring(0, n - i)))) &#123;</span><br><span class="line">                memo.put(s1 + &quot;#&quot; + s2, true);</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        memo.put(s1 + &quot;#&quot; + s2, false);</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="Decode-Ways"><a href="#Decode-Ways" class="headerlink" title="Decode Ways"></a>Decode Ways</h1><p><a href="https://leetcode.com/problems/decode-ways/description/" target="_blank" rel="noopener">Decode Ways</a><br>经典题，有很多corner case， 比如100 230等等，主要是以0相关的。如果遍历到这个数为0，需要向前看一位，如果这个位==1或者==2，就是合法的，否则continue;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int numDecodings(String s) &#123;</span><br><span class="line">        if (s == null || s.length() == 0) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        int n = s.length();</span><br><span class="line">        int[] dp = new int[n + 1];</span><br><span class="line">        dp[0] = 1;</span><br><span class="line">        if (s.charAt(0) == &apos;0&apos;) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        dp[1] = 1;</span><br><span class="line">        for (int i = 2; i &lt;= n; i++) &#123;</span><br><span class="line">            if (s.charAt(i - 1) == &apos;0&apos;) &#123;</span><br><span class="line">                if (s.charAt(i - 2) == &apos;1&apos; || s.charAt(i - 2) == &apos;2&apos;) &#123;</span><br><span class="line">                    dp[i] = dp[i - 2];</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    continue;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; else if (s.charAt(i - 2) == &apos;1&apos; || (s.charAt(i - 2) == &apos;2&apos; &amp;&amp; s.charAt(i - 1) &lt; &apos;7&apos;)) &#123;</span><br><span class="line">                dp[i] = dp[i - 1] + dp[i - 2];</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                dp[i] = dp[i - 1];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="Unique-Binary-Search-Trees"><a href="#Unique-Binary-Search-Trees" class="headerlink" title="Unique Binary Search Trees"></a>Unique Binary Search Trees</h1><p><a href="https://leetcode.com/problems/unique-binary-search-trees/description/" target="_blank" rel="noopener">Unique Binary Search Trees</a><br>卡特兰树，<a href="http://www.cnblogs.com/grandyang/p/4299608.html" target="_blank" rel="noopener">参考</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int numTrees(int n) &#123;</span><br><span class="line">        int[] dp = new int[n + 1];</span><br><span class="line">        dp[0] = 1;</span><br><span class="line">        dp[1] = 1;</span><br><span class="line">        for (int i = 2; i &lt;= n; i++) &#123;</span><br><span class="line">            for (int j = 0; j &lt; i; j++) &#123;</span><br><span class="line">                dp[i] += dp[j] * dp[i - j - 1];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="Interleaving-String"><a href="#Interleaving-String" class="headerlink" title="Interleaving String"></a>Interleaving String</h1><p><a href="https://leetcode.com/problems/interleaving-string/description/" target="_blank" rel="noopener">Interleaving String</a><br>这个题类似像regular expression match可以采用记忆化搜索top-down的方法，每一个位置枚举可能出现的值，类似序列型动态规划，建议十遍。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public boolean isInterleave(String s1, String s2, String s3) &#123;</span><br><span class="line">        int memo[][] = new int[s1.length()][s2.length()];</span><br><span class="line">        for (int i = 0; i &lt; s1.length(); i++) &#123;</span><br><span class="line">            for (int j = 0; j &lt; s2.length(); j++) &#123;</span><br><span class="line">                memo[i][j] = -1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return helper(s1, 0, s2, 0, s3, 0, memo);</span><br><span class="line">    &#125;</span><br><span class="line">    public boolean helper(String s1, int i, String s2, int j, String s3, int k, int[][] memo) &#123;</span><br><span class="line">        if (i == s1.length()) &#123;</span><br><span class="line">            return s2.substring(j).equals(s3.substring(k));</span><br><span class="line">        &#125;</span><br><span class="line">        if (j == s2.length()) &#123;</span><br><span class="line">            return s1.substring(i).equals(s3.substring(k));</span><br><span class="line">        &#125;</span><br><span class="line">        if (memo[i][j] &gt;= 0) &#123;</span><br><span class="line">            return memo[i][j] == 1 ? true : false;</span><br><span class="line">        &#125;</span><br><span class="line">        boolean ans = false;</span><br><span class="line">        if ((s3.charAt(k) == s1.charAt(i) &amp;&amp; helper(s1, i + 1, s2, j, s3, k + 1, memo)) </span><br><span class="line">             || (s3.charAt(k) == s2.charAt(j) &amp;&amp; helper(s1, i, s2, j + 1, s3, k + 1, memo))) &#123;</span><br><span class="line">            ans = true;</span><br><span class="line">        &#125;</span><br><span class="line">        memo[i][j] = ans ? 1 : 0;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="Distinct-Subsequences"><a href="#Distinct-Subsequences" class="headerlink" title="Distinct Subsequences"></a>Distinct Subsequences</h1><p><a href="https://leetcode.com/problems/distinct-subsequences/description/" target="_blank" rel="noopener">Distinct Subsequences</a><br>和上题类似，是区间型型动态规划，并不好想。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int numDistinct(String s, String t) &#123;</span><br><span class="line">        int n = s.length();</span><br><span class="line">        int m = t.length();</span><br><span class="line">        int[][] memo = new int[n + 1][m + 1];</span><br><span class="line">        for (int i = 0; i &lt;= n; i++) &#123;</span><br><span class="line">            memo[i][0] = 1;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int j = 1; j &lt;= m; j++) &#123;</span><br><span class="line">            for (int i = 1; i &lt;= n; i++) &#123;</span><br><span class="line">                if (s.charAt(i - 1) == t.charAt(j - 1)) &#123;</span><br><span class="line">                    memo[i][j] = memo[i - 1][j - 1] + memo[i - 1][j]; // 如果相等，就是有两种情况，i-1变成j，i-1变成j-1，加起来就行</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    memo[i][j] = memo[i - 1][j];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return memo[n][m];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="Best-Time-to-Buy-and-Sell-Stock-III"><a href="#Best-Time-to-Buy-and-Sell-Stock-III" class="headerlink" title="Best Time to Buy and Sell Stock III"></a>Best Time to Buy and Sell Stock III</h1><p><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/description/" target="_blank" rel="noopener">Best Time to Buy and Sell Stock III</a><br>关键是五种状态需要搞清楚，还有限制条件。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int maxProfit(int[] prices) &#123;</span><br><span class="line">        int N = 2;</span><br><span class="line">        // 0 init</span><br><span class="line">        // 1 before</span><br><span class="line">        // 2 inFirstBuy</span><br><span class="line">        // 3 between buys</span><br><span class="line">        // 4 SecondBuy</span><br><span class="line">        // 5 Done</span><br><span class="line">        int n = prices.length;</span><br><span class="line">        if (n == 0) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        int[][] dp = new int[n + 1][2 * N + 2];</span><br><span class="line">        for (int i = 1; i &lt;= n; i++) &#123;</span><br><span class="line">            for (int j = 1; j &lt; 2 * N + 2; j++) &#123;</span><br><span class="line">                if (j % 2 == 1) &#123;</span><br><span class="line">                    // 手里没有股票的时候，两种情况</span><br><span class="line">                    // 1. 前一天手里就没有股票</span><br><span class="line">                    // 2. 前一天有这一天卖了，需要算收益</span><br><span class="line">                    dp[i][j] = Math.max(dp[i][j], dp[i - 1][j]);</span><br><span class="line">                    if (i &gt; 1 &amp;&amp; j &gt; 1) &#123;</span><br><span class="line">                        dp[i][j] = Math.max(dp[i - 1][j - 1] + prices[i - 1] - prices[i - 2], dp[i][j]);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    // 手里有股票的时候，两种情况</span><br><span class="line">                    // 1. 前一天手里就有，需要算收益</span><br><span class="line">                    // 2. 今天刚买的，不需要算收益</span><br><span class="line">                    if (i &gt; 1) &#123;</span><br><span class="line">                        dp[i][j] = Math.max(dp[i - 1][j] + prices[i - 1] - prices[i - 2], dp[i][j]);</span><br><span class="line">                    &#125;</span><br><span class="line">                    if (j &gt; 1) &#123;</span><br><span class="line">                        dp[i][j] = Math.max(dp[i - 1][j - 1], dp[i][j]);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        // 枚举最大值</span><br><span class="line">        int res = 0;</span><br><span class="line">        for (int j = 1; j &lt;= 2 * N + 1; j += 2) &#123;</span><br><span class="line">            res = Math.max(res, dp[n][j]);</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="Palindrome-Partitioning-II"><a href="#Palindrome-Partitioning-II" class="headerlink" title="Palindrome Partitioning II"></a>Palindrome Partitioning II</h1><p><a href="https://leetcode.com/problems/palindrome-partitioning-ii/description/" target="_blank" rel="noopener">Palindrome Partitioning II</a><br>字符串扩展方法判断palindrome, 然后序列型dp求解。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minCut(String s) &#123;</span><br><span class="line">        if (s == null || s.length() == 0) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        boolean[][] pattern = getPalin(s);</span><br><span class="line">        int n = s.length();</span><br><span class="line">        int[] dp = new int[n + 1]; // number of palindrome in the string</span><br><span class="line">        Arrays.fill(dp, Integer.MAX_VALUE);</span><br><span class="line">        dp[0] = 0;</span><br><span class="line">        for (int i = 1; i &lt;= n; i++) &#123;</span><br><span class="line">            for (int j = i; j &gt; 0; j--) &#123;</span><br><span class="line">                if (pattern[j - 1][i - 1] &amp;&amp; dp[j - 1] != Integer.MAX_VALUE) &#123; // it can be divided to palindrome </span><br><span class="line">                    dp[i] = Math.min(dp[j - 1] + 1, dp[i]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[n] - 1;</span><br><span class="line">    &#125;</span><br><span class="line">    boolean[][] getPalin(String s) &#123;</span><br><span class="line">        char[] sc = s.toCharArray();</span><br><span class="line">        int n = sc.length;</span><br><span class="line">        boolean[][] res = new boolean[n][n];</span><br><span class="line">        for (int i = 0; i &lt; sc.length; i++) &#123;</span><br><span class="line">            int left = i;</span><br><span class="line">            int right = i;</span><br><span class="line">            while (left &gt;= 0 &amp;&amp; right &lt; n) &#123;</span><br><span class="line">                if (sc[left] == sc[right]) &#123;</span><br><span class="line">                    res[left][right] = true;</span><br><span class="line">                    left--;</span><br><span class="line">                    right++;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            left = i;</span><br><span class="line">            right = i + 1;</span><br><span class="line">            while (left &gt;= 0 &amp;&amp; right &lt; n) &#123;</span><br><span class="line">                if (sc[left] == sc[right]) &#123;</span><br><span class="line">                    res[left][right] = true;</span><br><span class="line">                    left--;</span><br><span class="line">                    right++;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="Burst-Balloons"><a href="#Burst-Balloons" class="headerlink" title="Burst Balloons"></a>Burst Balloons</h1><p><a href="https://leetcode.com/problems/burst-balloons/description/" target="_blank" rel="noopener">Burst Balloons</a><br>感觉这个题top-down + memoization更加好做一点，根据相应的范围进行recursion，还是挺巧妙的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int maxCoins(int[] nums) &#123;</span><br><span class="line">        int n = nums.length;</span><br><span class="line">        if (n == 0) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        int[] temp = new int[n + 2];</span><br><span class="line">        for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            temp[i + 1] = nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        temp[0] = temp[n + 1] = 1;</span><br><span class="line">        int[][] memo = new int[n + 2][n + 2];</span><br><span class="line">        return helper(memo, temp, 0, n + 1);</span><br><span class="line">    &#125;</span><br><span class="line">    int helper(int[][] memo, int[] temp, int left, int right) &#123;</span><br><span class="line">        if (left + 1 == right) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        if (memo[left][right] != 0) &#123;</span><br><span class="line">            return memo[left][right];</span><br><span class="line">        &#125;</span><br><span class="line">        int ans = 0;</span><br><span class="line">        for (int i = left + 1; i &lt; right; i++) &#123;</span><br><span class="line">            ans = Math.max(ans, temp[i] * temp[left] * temp[right] + helper(memo, temp, left, i) + helper(memo, temp, i, right));</span><br><span class="line">        &#125;</span><br><span class="line">        memo[left][right] = ans;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/24/database/" rel="next" title="DataBase Interview">
+                <i class="fa fa-chevron-left"></i> DataBase Interview
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Shangzhen Wu</p>
+              <p class="site-description motion-element" itemprop="description">This is a personal learning blog</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Longest-Palindromic-Substring"><span class="nav-number">2.</span> <span class="nav-text">Longest Palindromic Substring</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Longest-Palindromic-Subsequence"><span class="nav-number">3.</span> <span class="nav-text">Longest Palindromic Subsequence</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Regular-Expression-Matching"><span class="nav-number">4.</span> <span class="nav-text">Regular Expression Matching</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Wildcard-Matching"><span class="nav-number">5.</span> <span class="nav-text">Wildcard Matching</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Longest-Valid-Parentheses"><span class="nav-number">6.</span> <span class="nav-text">Longest Valid Parentheses</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Edit-Distance"><span class="nav-number">7.</span> <span class="nav-text">Edit Distance</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Scramble-String"><span class="nav-number">8.</span> <span class="nav-text">Scramble String</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Decode-Ways"><span class="nav-number">9.</span> <span class="nav-text">Decode Ways</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Unique-Binary-Search-Trees"><span class="nav-number">10.</span> <span class="nav-text">Unique Binary Search Trees</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Interleaving-String"><span class="nav-number">11.</span> <span class="nav-text">Interleaving String</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Distinct-Subsequences"><span class="nav-number">12.</span> <span class="nav-text">Distinct Subsequences</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-III"><span class="nav-number">13.</span> <span class="nav-text">Best Time to Buy and Sell Stock III</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Palindrome-Partitioning-II"><span class="nav-number">14.</span> <span class="nav-text">Palindrome Partitioning II</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Burst-Balloons"><span class="nav-number">15.</span> <span class="nav-text">Burst Balloons</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shangzhen Wu</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

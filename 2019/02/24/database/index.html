@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="指针变量引用123456int a = 1;int b = 10;int* p = &amp;amp;a;int* &amp;amp;pa = p;(*pa)++; //这里的pa是p的引用，对pa指向的内容+1，a = 2pa = &amp;amp;b; //pa指向b的地址，由于pa是p的引用，所以p也指向b的地址 b = 11  指针初始化12int* p *p = 5 // 因为p没有初始化，所以p是野指针，经常">
+<meta name="description" content="IndexB+ TreeB Tree 指的是 Balance Tree，也就是平衡树。平衡树是一颗查找树，并且所有叶子节点位于同一层。 B+ Tree 是基于 B Tree 和叶子节点顺序访问指针进行实现，它具有 B Tree 的平衡性，并且通过顺序访问指针来提高区间查询的性能。每个节点中有一系列的key，key之间有指针，指针所指向的所有key都大于等于指针的左key同时小于等于指针的右key。">
 <meta name="keywords" content="Algorithm, Computer">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C &amp; C++ 1">
-<meta property="og:url" content="http://yoursite.com/2019/02/11/interview1/index.html">
+<meta property="og:title" content="DataBase Interview">
+<meta property="og:url" content="http://yoursite.com/2019/02/24/database/index.html">
 <meta property="og:site_name" content="Shangzhen&#39;s Blog">
-<meta property="og:description" content="指针变量引用123456int a = 1;int b = 10;int* p = &amp;amp;a;int* &amp;amp;pa = p;(*pa)++; //这里的pa是p的引用，对pa指向的内容+1，a = 2pa = &amp;amp;b; //pa指向b的地址，由于pa是p的引用，所以p也指向b的地址 b = 11  指针初始化12int* p *p = 5 // 因为p没有初始化，所以p是野指针，经常">
+<meta property="og:description" content="IndexB+ TreeB Tree 指的是 Balance Tree，也就是平衡树。平衡树是一颗查找树，并且所有叶子节点位于同一层。 B+ Tree 是基于 B Tree 和叶子节点顺序访问指针进行实现，它具有 B Tree 的平衡性，并且通过顺序访问指针来提高区间查询的性能。每个节点中有一系列的key，key之间有指针，指针所指向的所有key都大于等于指针的左key同时小于等于指针的右key。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-02-11T10:19:49.357Z">
+<meta property="og:updated_time" content="2019-02-25T07:47:43.056Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C &amp; C++ 1">
-<meta name="twitter:description" content="指针变量引用123456int a = 1;int b = 10;int* p = &amp;amp;a;int* &amp;amp;pa = p;(*pa)++; //这里的pa是p的引用，对pa指向的内容+1，a = 2pa = &amp;amp;b; //pa指向b的地址，由于pa是p的引用，所以p也指向b的地址 b = 11  指针初始化12int* p *p = 5 // 因为p没有初始化，所以p是野指针，经常">
+<meta name="twitter:title" content="DataBase Interview">
+<meta name="twitter:description" content="IndexB+ TreeB Tree 指的是 Balance Tree，也就是平衡树。平衡树是一颗查找树，并且所有叶子节点位于同一层。 B+ Tree 是基于 B Tree 和叶子节点顺序访问指针进行实现，它具有 B Tree 的平衡性，并且通过顺序访问指针来提高区间查询的性能。每个节点中有一系列的key，key之间有指针，指针所指向的所有key都大于等于指针的左key同时小于等于指针的右key。">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/02/11/interview1/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/02/24/database/"/>
 
 
 
 
 
-  <title>C & C++ 1 | Shangzhen's Blog</title>
+  <title>DataBase Interview | Shangzhen's Blog</title>
   
 
 
@@ -243,7 +243,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/11/interview1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/24/database/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shangzhen Wu">
@@ -260,7 +260,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">C & C++ 1</h1>
+          <h1 class="post-title" itemprop="name headline">DataBase Interview</h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-11T02:19:49-08:00">
-                2019-02-11
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-24T23:47:43-08:00">
+                2019-02-25
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Interview/" itemprop="url" rel="index">
-                    <span itemprop="name">Interview</span>
+                  <a href="/categories/DataBase/" itemprop="url" rel="index">
+                    <span itemprop="name">DataBase</span>
                   </a>
                 </span>
 
@@ -332,16 +332,29 @@
       
 
       
-        <h1 id="指针变量引用"><a href="#指针变量引用" class="headerlink" title="指针变量引用"></a>指针变量引用</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int a = 1;</span><br><span class="line">int b = 10;</span><br><span class="line">int* p = &amp;a;</span><br><span class="line">int* &amp;pa = p;</span><br><span class="line">(*pa)++; //这里的pa是p的引用，对pa指向的内容+1，a = 2</span><br><span class="line">pa = &amp;b; //pa指向b的地址，由于pa是p的引用，所以p也指向b的地址 b = 11</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="指针初始化"><a href="#指针初始化" class="headerlink" title="指针初始化"></a>指针初始化</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int* p </span><br><span class="line">*p = 5 // 因为p没有初始化，所以p是野指针，经常导致程序崩溃</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="临时变量非法引用"><a href="#临时变量非法引用" class="headerlink" title="临时变量非法引用"></a>临时变量非法引用</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const float pi = 3.14;</span><br><span class="line">float f;</span><br><span class="line">float f1(float r) &#123;</span><br><span class="line">    f = r * r * pi;</span><br><span class="line">    return f;    </span><br><span class="line">&#125;</span><br><span class="line">float&amp; f2(float r) &#123;</span><br><span class="line">    f = r * r * pi;</span><br><span class="line">    return f; // 返回f的引用    </span><br><span class="line">&#125;</span><br><span class="line">int main() &#123;</span><br><span class="line">    float f1(float r = 5);</span><br><span class="line">    float&amp; f2(float r = 5); //声明函数的默认参数调用，默认参数为5</span><br><span class="line">    float a = f1(); </span><br><span class="line">    float&amp; b = f1(); // 错误，f1里面计算的值会付给一个temp的临时变量，临时变量是无法建立引用的</span><br><span class="line">    float c = f2(); // 正确，返回全局变量f的引用</span><br><span class="line">    float&amp; d = f2(); // 正确，主函数不定义变量而是直接使用f的引用的方式，最节省内存空间的方式，注意有效期的问题 </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="常量引用"><a href="#常量引用" class="headerlink" title="常量引用"></a>常量引用</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int a = 5;</span><br><span class="line">const int&amp; b = a;</span><br><span class="line">b = 1 // 错误，无法更改, 这样就可以向外暴露一个只读的接口值</span><br><span class="line">a = 1 //正确</span><br><span class="line"></span><br><span class="line">const int c = 5;</span><br><span class="line">int&amp; d = c //错误，必须是常量引用才可以，const int&amp; d = c</span><br></pre></td></tr></table></figure>
-<p><strong>_常量必须用常量引用，非常量也可以用常量引用_</strong></p>
-<hr>
-<h1 id="指针和引用"><a href="#指针和引用" class="headerlink" title="指针和引用"></a>指针和引用</h1><p>引用一般是用指针实现的，引用安全，一旦赋值不可能更改。</p>
+        <h1 id="Index"><a href="#Index" class="headerlink" title="Index"></a>Index</h1><h2 id="B-Tree"><a href="#B-Tree" class="headerlink" title="B+ Tree"></a>B+ Tree</h2><p>B Tree 指的是 Balance Tree，也就是平衡树。平衡树是一颗查找树，并且所有叶子节点位于同一层。</p>
+<p>B+ Tree 是基于 B Tree 和叶子节点顺序访问指针进行实现，它具有 B Tree 的平衡性，并且通过顺序访问指针来提高区间查询的性能。<br>每个节点中有一系列的key，key之间有指针，指针所指向的所有key都大于等于指针的左key同时小于等于指针的右key。</p>
+<h2 id="Search"><a href="#Search" class="headerlink" title="Search"></a>Search</h2><p>先在根节点二分查找，然后找到key所在指针，递归查找指针所指向的节点，到达leaf之后二分查找找到data。插入删除需要对tree分裂合并等维护平衡性</p>
+<h2 id="Compare"><a href="#Compare" class="headerlink" title="Compare"></a>Compare</h2><p>这个面试的时候考过<br>红黑树等平衡树也可以用来实现索引，但是文件系统及数据库系统普遍采用 B+ Tree 作为索引结构，主要有以下两个原因：</p>
+<ol>
+<li><p>更少的查找次数<br>平衡树查找操作的时间复杂度和树高 h 相关，O(h)=O(logdN)，其中 d 为每个节点的出度。<br>红黑树的出度为 2，而 B+ Tree 的出度一般都非常大，所以红黑树的树高 h 很明显比 B+ Tree 大非常多，查找的次数也就更多。</p>
+</li>
+<li><p>利用磁盘预读特性<br>为了减少磁盘 I/O 操作，磁盘往往不是严格按需读取，而是每次都会预读。预读过程中，磁盘进行顺序读取，顺序读取不需要进行磁盘寻道，并且只需要很短的旋转时间，速度会非常快。<br>操作系统一般将内存和磁盘分割成固定大小的块，每一块称为一页，内存与磁盘以页为单位交换数据。数据库系统将索引的一个节点的大小设置为页的大小，使得一次 I/O 就能完全载入一个节点。并且可以利用预读特性，相邻的节点也能够被预先载入。</p>
+</li>
+</ol>
+<h1 id="MySQL-Index"><a href="#MySQL-Index" class="headerlink" title="MySQL Index"></a>MySQL Index</h1><p>索引是在存储引擎层实现的，而不是在服务器层实现的，所以不同存储引擎具有不同的索引类型和实现。</p>
+<h2 id="B-index"><a href="#B-index" class="headerlink" title="B+ index"></a>B+ index</h2><p>默认，查找树速度快，排序分组，可以指定多个列为索引列共同组成键<br>innoDB的B+索引分为主索引和辅助索引，主索引的叶子节点data域记录着完整的数据，为聚簇索引，唯一性, 从而避免直接读取磁盘，因此对查询性能有很大的提升。<br>辅助索引的data域记录主键的值，使用辅助索引时需要先找到主键值，然后到主索引中查找。</p>
+<h2 id="hash-index"><a href="#hash-index" class="headerlink" title="hash index"></a>hash index</h2><p>O(1)查找，无序，精确查找，无法支持部分查找和范围查找。<br>innoDB存储引擎有自适应哈希索引，当某个索引值被使用的非常频繁时，会在 B+Tree 索引之上再创建一个哈希索引，这样就让 B+Tree 索引具有哈希索引的一些优点，比如快速的哈希查找。</p>
+<h2 id="Index-Advantages"><a href="#Index-Advantages" class="headerlink" title="Index Advantages"></a>Index Advantages</h2><ul>
+<li>大大减少了服务器需要扫描的数据行数。</li>
+<li>帮助服务器避免进行排序和分组，以及避免创建临时表（B+Tree 索引是有序的，可以用于 ORDER BY 和 GROUP BY 操作。临时表主要是在排序和分组过程中创建，因为不需要排序和分组，也就不需要创建临时表）。</li>
+<li>将随机 I/O 变为顺序 I/O（B+Tree 索引是有序的，会将相邻的数据都存储在一起）。</li>
+</ul>
+<h2 id="Index-Conditions"><a href="#Index-Conditions" class="headerlink" title="Index Conditions"></a>Index Conditions</h2><ul>
+<li>对于非常小的表、大部分情况下简单的全表扫描比建立索引更高效；</li>
+<li>对于中到大型的表，索引就非常有效；</li>
+<li>但是对于特大型的表，建立和维护索引的代价将会随之增长。这种情况下，需要用到一种技术可以直接区分出需要查询的一组数据，而不是一条记录一条记录地匹配，例如可以使用分区技术。</li>
+</ul>
 
       
     </div>
@@ -366,8 +379,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/11/ListNode/" rel="next" title="ListNode">
-                <i class="fa fa-chevron-left"></i> ListNode
+              <a href="/2019/02/18/system-design-9/" rel="next" title="System Design 9 Message System">
+                <i class="fa fa-chevron-left"></i> System Design 9 Message System
               </a>
             
           </div>
@@ -376,8 +389,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/02/13/time-complexity/" rel="prev" title="Complexity">
-                Complexity <i class="fa fa-chevron-right"></i>
+              <a href="/2019/02/25/dynamic-programing/" rel="prev" title="Dynamic Programming">
+                Dynamic Programming <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -501,7 +514,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#指针变量引用"><span class="nav-number">1.</span> <span class="nav-text">指针变量引用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#指针初始化"><span class="nav-number">2.</span> <span class="nav-text">指针初始化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#临时变量非法引用"><span class="nav-number">3.</span> <span class="nav-text">临时变量非法引用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常量引用"><span class="nav-number">4.</span> <span class="nav-text">常量引用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#指针和引用"><span class="nav-number">5.</span> <span class="nav-text">指针和引用</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Index"><span class="nav-number">1.</span> <span class="nav-text">Index</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#B-Tree"><span class="nav-number">1.1.</span> <span class="nav-text">B+ Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Search"><span class="nav-number">1.2.</span> <span class="nav-text">Search</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Compare"><span class="nav-number">1.3.</span> <span class="nav-text">Compare</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL-Index"><span class="nav-number">2.</span> <span class="nav-text">MySQL Index</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#B-index"><span class="nav-number">2.1.</span> <span class="nav-text">B+ index</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hash-index"><span class="nav-number">2.2.</span> <span class="nav-text">hash index</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Index-Advantages"><span class="nav-number">2.3.</span> <span class="nav-text">Index Advantages</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Index-Conditions"><span class="nav-number">2.4.</span> <span class="nav-text">Index Conditions</span></a></li></ol></li></ol></div>
             
 
           </div>
